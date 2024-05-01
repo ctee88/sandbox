@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,71 +9,33 @@ namespace sandbox.Components
 {
     public abstract class MovableSolid : Element
     {
-        //move() or update()?
-        public void move()
+        public override void UpdateElementPos(int x, int y, Element element)
         {
-            for (int x = 0; x < ElementMatrix.size_x; x++)
+            //y += element.velocityY + ElementMatrix.gravity;
+
+            //Directly below
+            if (ElementMatrix.IsWithinBounds(x, y + 1) && ElementMatrix.IsEmptyCell(x, y + 1))
             {
-                for (int y = 0; y < ElementMatrix.size_y; y++)
-                {
-                    var element = ElementMatrix.elements[x, y];
-                    if (element != null)
-                    {
-                        element.velocity.Y += 1;
-                        if (MathF.Abs(element.velocity.Y) > 1)
-                        {
-                            element.velocity.Y = 1 * Math.Sign(element.velocity.Y);
-                        }
-
-                        element.velocity.X += 0;
-                        if (MathF.Abs(element.velocity.X) > 1)
-                        {
-                            element.velocity.X = 1 * Math.Sign(element.velocity.X);
-                        }
-
-                        int next_x = x + (int)element.velocity.X;
-                        int next_y = y + (int)element.velocity.Y;
-
-                        if (!checkCollisions(next_x, next_y))
-                        {
-
-                        }
-                        else if (!checkCollisions(next_x - 1, next_y))
-                        {
-                            next_x -= 1;
-                        }
-                        else if (!checkCollisions(next_x + 1, next_y))
-                        {
-                            next_x += 1;
-                        }
-                        else
-                        {
-                            next_x = x;
-                            element.velocity.X = 0;
-
-                            next_y = y;
-                            element.velocity.Y = 0;
-                        }
-                        ElementMatrix.elements[x, y] = null;
-                        x = next_x;
-                        y = next_y;
-                        ElementMatrix.elements[x, y] = element;
-                    }
-                }
+                ElementMatrix.elements[x, y + 1] = element;
+                ElementMatrix.elements[x, y] = null;
             }
-        }
-
-        public override bool checkCollisions(int x, int y)
-        {
-            if (y >= ElementMatrix.size_x)
+            //Below left
+            else if (ElementMatrix.IsWithinBounds(x - 1, y + 1) && ElementMatrix.IsEmptyCell(x - 1, y + 1))
             {
-                return true;
+                ElementMatrix.elements[x - 1, y + 1] = element;
+                ElementMatrix.elements[x, y] = null;
             }
-            if (x <= -1 || x >= ElementMatrix.size_y)
+            //Below right
+            else if (ElementMatrix.IsWithinBounds(x + 1, y + 1) && ElementMatrix.IsEmptyCell(x + 1, y + 1))
             {
-                return true;
+                ElementMatrix.elements[x + 1, y + 1] = element;
+                ElementMatrix.elements[x, y] = null;
             }
-            return ElementMatrix.elements[x, y] != null;
+            //Can't move
+            //else
+            //{
+            //    element.velocityY = 0;
+            //}
         }
     }
 }
