@@ -13,8 +13,8 @@ namespace sandbox.Components
 {
     static class Player
     {
-        static int spawnTimer = 0;
-        static Random random = new Random();
+        private static int spawnTimer = 0;
+        private static Random random = new Random();
 
         public static void Update(GameTime gameTime, GraphicsDeviceManager graphics)
         {
@@ -23,13 +23,13 @@ namespace sandbox.Components
             //TODO: Functionality for selecting element, i.e '1' for sand, '2' for water etc...
             //TODO: Make a simple GUI to select element
             //Will need an InputManager
-            if (mouseState.LeftButton == ButtonState.Pressed && spawnTimer > 10)
+            if (mouseState.LeftButton == ButtonState.Pressed && spawnTimer > 40)
             {
                 spawnTimer = 0;
-                var mouseRow = mouseState.Position.X * ElementMatrix.size_x / graphics.PreferredBackBufferWidth;
-                var mouseCol = mouseState.Position.Y * ElementMatrix.size_y / graphics.PreferredBackBufferHeight;
+                int mouseRow = mouseState.Position.X * ElementMatrix.size_x / graphics.PreferredBackBufferWidth;
+                int mouseCol = mouseState.Position.Y * ElementMatrix.size_y / graphics.PreferredBackBufferHeight;
 
-                int spawnMatrixArea = 5;
+                int spawnMatrixArea = 8;
                 int spawnMatrixSize = spawnMatrixArea / 2;
                 for (int i = -spawnMatrixSize; i <= spawnMatrixSize; i++)
                 {

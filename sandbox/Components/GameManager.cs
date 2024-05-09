@@ -15,6 +15,5 @@ namespace sandbox.Components
         public static int screenWidth = 800;
         public static int screenHeight = 800;
         public static float scale = 1.0f;
-
     }
 }
