@@ -9,6 +9,7 @@ namespace sandbox.Components
 {
     public static class ColorConstants
     {
+        private static Random random = new Random();
         private static Dictionary<string, List<Color>> colorMap = new Dictionary<string, List<Color>>();
 
         //Immovable Solids
@@ -24,10 +25,10 @@ namespace sandbox.Components
         public static Color GetElementColor(string elementName)
         {
             List<Color> colors = colorMap[elementName];
-            Random random = new Random();
-            int randomInt = random.Next(0, colors.Count);
+            //Random random = new Random();
+            int randomNum = random.Next(0, colors.Count);
 
-            return colors[randomInt];
+            return colors[randomNum];
         }
     }
 }

@@ -45,6 +45,12 @@ namespace sandbox
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            //Clear the screen
+            if (Keyboard.GetState().IsKeyDown(Keys.C))
+            {
+                _elementMatrix.CreateElementMatrix();
+            }
+
             Player.Update(gameTime, _graphics);
             _elementMatrix.Move();
             base.Update(gameTime);
@@ -59,9 +65,9 @@ namespace sandbox
 
             GraphicsDevice.Clear(Color.Black);
 
-            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
 
-            ElementMatrix.DrawMatrix(ElementMatrix.elements, _spriteBatch);
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
+            _elementMatrix.DrawMatrix(ElementMatrix.elements, _spriteBatch);
             _spriteBatch.End();
 
             // Set rendering back to the back buffer.
