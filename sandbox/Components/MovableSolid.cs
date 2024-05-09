@@ -45,6 +45,7 @@ namespace sandbox.Components
                 return index;
             }
 
+            //Can't move
             index[0] = x;
             index[1] = y;
             return index;
