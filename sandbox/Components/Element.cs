@@ -16,10 +16,10 @@ namespace sandbox.Components
         public Vector2 pos = new Vector2(0, 0);
         //public float velX = 0; don't think velX will be used
         public float velY = 0f;
-        public int maxVelY = 4;
+        public int maxVelY = 4; //If you want maxVelY to differ between elements, UpdateElementVelocity() will become virtual
         public bool isFalling = true;
 
-        public abstract int[] UpdateElementPosition(int x, int y, Element element);
+        public abstract int[] UpdateElementPosition(int x, int y, Element element, bool leftOrRight);
 
         public void UpdateElementVelocity()
         {
@@ -35,7 +35,6 @@ namespace sandbox.Components
         public void ResetElementVelocity()
         {
             velY = 0;
-            isFalling = false;
         }
 
         public int GetUpdateCount()
