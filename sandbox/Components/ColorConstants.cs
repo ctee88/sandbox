@@ -17,15 +17,18 @@ namespace sandbox.Components
         private static Color SAND_2 = new Color(178 / 255f, 201 / 255f, 6 / 255f);
         private static Color SAND_3 = new Color(233 / 255f, 252 / 255f, 90 / 255f);
 
+        //Liquids
+        private static Color WATER_1 = new Color(28 / 255f, 86 / 255f, 234 / 255f, 0.1f);
+
         public static void InitialiseElementColors()
         {
             colorMap.Add("Sand", new List<Color> { SAND_1, SAND_2, SAND_3 });
+            colorMap.Add("Water", new List<Color> { WATER_1 });
         }
 
         public static Color GetElementColor(string elementName)
         {
             List<Color> colors = colorMap[elementName];
-            //Random random = new Random();
             int randomNum = random.Next(0, colors.Count);
 
             return colors[randomNum];

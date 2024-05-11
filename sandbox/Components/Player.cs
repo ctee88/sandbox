@@ -47,16 +47,28 @@ namespace sandbox.Components
                                 //Need to get the correct element
                                 //For now just instantiate sand - Element -> MovableSolid -> Sand
                                 //Will need to implement instantiating the correct element in the future
-                                Element sand = new Sand();
-                                ElementMatrix.elements[row, col] = sand;
-                                sand.pos = new Vector2(row, col);
+                                //Element sand = new Sand();
+                                //ElementMatrix.elements[row, col] = sand;
+                                //sand.pos = new Vector2(row, col);
 
-                                if (sand.texture == null)
+                                //if (sand.texture == null)
+                                //{
+                                //    sand.texture = new Texture2D(graphics.GraphicsDevice, 1, 1);
+
+                                //    sand.texture.SetData<Color>(new Color[] { sand.color });
+                                //}
+
+                                Element water = new Water();
+                                ElementMatrix.elements[row, col] = water;
+                                water.pos = new Vector2(row, col);
+
+                                if (water.texture == null)
                                 {
-                                    sand.texture = new Texture2D(graphics.GraphicsDevice, 1, 1);
+                                    water.texture = new Texture2D(graphics.GraphicsDevice, 1, 1);
 
-                                    sand.texture.SetData<Color>(new Color[] { sand.color });
+                                    water.texture.SetData<Color>(new Color[] { water.color });
                                 }
+
                             }
                         }
                     }

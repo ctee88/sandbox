@@ -9,7 +9,7 @@ namespace sandbox.Components
 {
     public abstract class MovableSolid : Element
     {
-        public override int[] UpdateElementPosition(int x, int y, Element element)
+        public override int[] UpdateElementPosition(int x, int y, Element element, bool leftOrRight)
         {
             int[] index = new int[2];
             //Directly below

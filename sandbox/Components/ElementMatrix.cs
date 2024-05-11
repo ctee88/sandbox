@@ -19,13 +19,15 @@ namespace sandbox.Components
         public const int size_y = size_x;
         public static Element[,] elements;
         public static float gravity = 0.2f;
+        public static Random random = new Random();
+
         public void CreateElementMatrix()
         {
             elements = new Element[size_x, size_y];
 
-            for (int x = 0; x < size_x - 1; x++)
+            for (int x = 0; x < size_x; x++)
             {
-                for (int y = 0; y < size_y - 1; y++)
+                for (int y = 0; y < size_y; y++)
                 {
                     elements[x, y] = null;
                 }
@@ -46,14 +48,16 @@ namespace sandbox.Components
                     {
                         element.CheckIfFalling();
 
-                        if (!element.isFalling)
+                        if (!element.isFalling)// && element is MovableSolid) This seems wrong, might get caught out in the future... Wtf do I even need this?
                         {
                             continue;
                         }
 
                         for (int i = 0; i < element.GetUpdateCount(); i++)
                         {
-                            int[] newIndex = element.UpdateElementPosition(x, y, element);
+                            bool leftOrRight = random.NextDouble() > 0.5;
+
+                            int[] newIndex = element.UpdateElementPosition(x, y, element, leftOrRight);
                             if (newIndex[0] != x || newIndex[1] != y)
                             {
                                 x = newIndex[0];
@@ -72,11 +76,11 @@ namespace sandbox.Components
         public void DrawMatrix(Element[,] elements, SpriteBatch spritebatch)
         {
             int depth = 0;
-            for (int x = 0; x < size_x; x++)
-            //for (int x = size_x - 1; x >= 0; x--)
+            //for (int x = 0; x < size_x; x++)
+            for (int x = size_x - 1; x >= 0; x--)
             {
-                //for (int y = size_y - 1; y >= 0; y--)
-                for (int y = 0; y < size_y; y++)
+                for (int y = size_y - 1; y >= 0; y--)
+                //for (int y = 0; y < size_y; y++)
                 {
                     depth += 1;
                     Element element = elements[x, y];
