@@ -50,5 +50,11 @@ namespace sandbox.Components
             UpdateElementVelocity();
             isFalling = velY != 0;
         }
+        //ElementType or ElementName?
+        //public enum ElementName
+        //{
+        //    Sand,
+        //    Water,
+        //}
     }
 }

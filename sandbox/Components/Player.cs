@@ -23,13 +23,13 @@ namespace sandbox.Components
             //TODO: Functionality for selecting element, i.e '1' for sand, '2' for water etc...
             //TODO: Make a simple GUI to select element
             //Will need an InputManager
-            if (mouseState.LeftButton == ButtonState.Pressed && spawnTimer > 40)
+            if (mouseState.LeftButton == ButtonState.Pressed && spawnTimer > 60)
             {
                 spawnTimer = 0;
                 int mouseRow = mouseState.Position.X * ElementMatrix.size_x / graphics.PreferredBackBufferWidth;
                 int mouseCol = mouseState.Position.Y * ElementMatrix.size_y / graphics.PreferredBackBufferHeight;
 
-                int spawnMatrixArea = 8;
+                int spawnMatrixArea = 5;
                 int spawnMatrixSize = spawnMatrixArea / 2;
                 for (int i = -spawnMatrixSize; i <= spawnMatrixSize; i++)
                 {

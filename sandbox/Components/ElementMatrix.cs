@@ -15,7 +15,7 @@ namespace sandbox.Components
 {
     public class ElementMatrix
     {
-        public const int size_x = 256;
+        public const int size_x = 128;
         public const int size_y = size_x;
         public static Element[,] elements;
         public static float gravity = 0.2f;
@@ -76,11 +76,11 @@ namespace sandbox.Components
         public void DrawMatrix(Element[,] elements, SpriteBatch spritebatch)
         {
             int depth = 0;
-            //for (int x = 0; x < size_x; x++)
-            for (int x = size_x - 1; x >= 0; x--)
+            for (int x = 0; x < size_x; x++)
+            //for (int x = size_x - 1; x >= 0; x--)
             {
-                for (int y = size_y - 1; y >= 0; y--)
-                //for (int y = 0; y < size_y; y++)
+                //for (int y = size_y - 1; y >= 0; y--)
+                for (int y = 0; y < size_y; y++)
                 {
                     depth += 1;
                     Element element = elements[x, y];
