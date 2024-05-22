@@ -13,18 +13,26 @@ namespace sandbox.Components
     {
         public Rectangle _destinationRect { get; private set; }
         public Texture2D _texture { get; private set; }
-        //public String _elementName { get; private set; }
-
-        public GuiElement(Rectangle rect, Texture2D texture)//, String elementName)
+        public String _elementName { get; private set; }
+        public bool _isHovering;
+        //public bool _isSelected = false;
+        public GuiElement(Rectangle rect, Texture2D texture, String elementName)
         {
             _destinationRect = rect;
             _texture = texture;
-            //_elementName = elementName;
+            _elementName = elementName;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Color color)
         {
-            spriteBatch.Draw(_texture, _destinationRect, Color.White);
+            spriteBatch.Draw(_texture, _destinationRect, color);
         }
-    }
+
+        public void DrawElementName(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
+        {
+            spriteBatch.DrawString(GuiManager._font, _elementName.ToUpper(),
+                new Vector2(0, 8),
+                Color.White);
+        }
+    }   
 }

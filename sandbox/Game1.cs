@@ -40,7 +40,7 @@ namespace sandbox
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            GuiManager.Load(Content);
+            GuiManager.LoadTextures(Content);
             GuiManager.InitialiseGui();
         }
 
@@ -55,6 +55,8 @@ namespace sandbox
                 _elementMatrix.CreateElementMatrix();
             }
 
+            //GuiManager.Update(gameTime, _graphics);
+            GuiManager.SelectElement(gameTime, _graphics);
             Player.Update(gameTime, _graphics);
             _elementMatrix.Move();
             base.Update(gameTime);
@@ -71,7 +73,7 @@ namespace sandbox
 
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
             _elementMatrix.DrawMatrix(ElementMatrix.elements, _spriteBatch);
-            GuiManager.Draw(_spriteBatch);
+            GuiManager.Draw(_spriteBatch, _graphics);
 
             _spriteBatch.End();
 
