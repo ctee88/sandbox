@@ -14,7 +14,7 @@ namespace sandbox.Components
         public Rectangle _destinationRect { get; private set; }
         public Texture2D _texture { get; private set; }
         public String _elementName { get; private set; }
-        public bool _isHovering;
+        //public bool _isHovering;
         //public bool _isSelected = false;
         public GuiElement(Rectangle rect, Texture2D texture, String elementName)
         {

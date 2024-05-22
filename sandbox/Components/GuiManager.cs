@@ -23,6 +23,7 @@ namespace sandbox.Components
         private static Texture2D _sand;
         private static Texture2D _water;
 
+        //private static string hoveredElementName;
         //Default selection
         private static string selectedElementName = "Sand";
         public static void LoadTextures(ContentManager content)
@@ -52,28 +53,24 @@ namespace sandbox.Components
                                                 _currentMouse.Position.Y * ElementMatrix.size_y / graphics.PreferredBackBufferHeight,
                                                 1, 1);
 
-            //If no element selected: Keep checking all guiElements for an intersection with the mouse
-            //If element selected (eg sand): GUI should keep track of selectedelement (state/_isSelected/_isActive flag??) so that the player
-            //can only spawn this element UNTIL another element is selected from the GUI
+            //hoveredElementName = string.Empty;
 
             foreach (var guiElement in guiElements)
             {
-                guiElement._isHovering = false;
+                //guiElement._isHovering = false;
                 //guiElement._isSelected = false;
                 if (guiElement._destinationRect.Intersects(mouseRectangle))
                 {
-                    guiElement._isHovering = true;
+                    //guiElement._isHovering = true;
+                    //hoveredElementName = guiElement._elementName;
+
                     if (_currentMouse.LeftButton == ButtonState.Released && _previousMouse.LeftButton == ButtonState.Pressed)
                     {
-                        //guiElement._isSelected = true;
                         selectedElementName = guiElement._elementName;
-
                         Debug.WriteLine("Intersect test working");
-                        //return guiElement._elementName;
                     }
                 }
             }
-            //return "Test string";
         }
 
         public static void Draw(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
@@ -82,27 +79,16 @@ namespace sandbox.Components
             {
                 var color = Color.White;
 
-                if (guiElement._isHovering) //|| _isSelected? to keep an element grey once selected
+                if (guiElement._elementName == selectedElementName)
                 {
                     color = Color.Gray;
-                    guiElement.Draw(spriteBatch, color);
                     guiElement.DrawElementName(spriteBatch, graphics);
                 }
-                else 
-                { 
-                    guiElement.Draw(spriteBatch, color); 
-                }
-                
+
+                guiElement.Draw(spriteBatch, color);
             }
         }
     }
 }
 
-//Click event - what happens when the player clicks a box?
-//1) Box should turn grey (or highlight different colour) to represent selected element - maybe handled in Draw()
-//2) ElementName should be displayed (x-centered, y-slightly under element boxes) showing the current selected element
-//3) Player should only be able to spawn the current selected element - will need to pass this element
-//      to Player.Update() so that the correct element is instantiated and spawned in the matrix (this method no longer void)
-//Other notes - Is gametime a required paremeter here?
-//            - Player should not be able to spawn elements when clicking a box, maybe handle this in Player()
 
