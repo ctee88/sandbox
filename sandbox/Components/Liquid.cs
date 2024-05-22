@@ -17,7 +17,7 @@ namespace sandbox.Components
 
                 return index;
             }
-
+            
             //Below left
             else if (ElementMatrix.IsWithinBounds(x - 1, y + 1) && ElementMatrix.IsEmptyCell(x - 1, y + 1))
             {

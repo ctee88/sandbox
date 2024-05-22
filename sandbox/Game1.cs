@@ -17,19 +17,21 @@ namespace sandbox
         {
             _graphics = new GraphicsDeviceManager(this);
             _graphics.GraphicsProfile = GraphicsProfile.HiDef;
+            Content.RootDirectory = "Content";
             IsMouseVisible = true;
             IsFixedTimeStep = true;
             TargetElapsedTime = TimeSpan.FromMilliseconds(8.333); //60 frames/sec = 16.667ms pre frame
 
             _graphics.PreferredBackBufferHeight = GameManager.screenHeight;
             _graphics.PreferredBackBufferWidth = GameManager.screenWidth;
-            //_graphics.ApplyChanges(); //Do you need this if screen size is set on startup?
+            _graphics.ApplyChanges(); 
         }
 
         protected override void Initialize()
         {
             _elementMatrix.CreateElementMatrix();
             ColorConstants.InitialiseElementColors();
+            //GuiManager.InitialiseGui();
 
             base.Initialize();
         }
@@ -37,7 +39,9 @@ namespace sandbox
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            // TODO: use this.Content to load your game content here
+
+            GuiManager.LoadTextures(Content);
+            GuiManager.InitialiseGui();
         }
 
         protected override void Update(GameTime gameTime)
@@ -51,6 +55,7 @@ namespace sandbox
                 _elementMatrix.CreateElementMatrix();
             }
 
+            GuiManager.SelectElement(gameTime, _graphics);
             Player.Update(gameTime, _graphics);
             _elementMatrix.Move();
             base.Update(gameTime);
@@ -65,9 +70,10 @@ namespace sandbox
 
             GraphicsDevice.Clear(Color.Black);
 
-
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
             _elementMatrix.DrawMatrix(ElementMatrix.elements, _spriteBatch);
+            GuiManager.Draw(_spriteBatch, _graphics);
+
             _spriteBatch.End();
 
             // Set rendering back to the back buffer.
