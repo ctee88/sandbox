@@ -30,9 +30,16 @@ namespace sandbox.Components
 
         public void DrawElementName(SpriteBatch spriteBatch, GraphicsDeviceManager graphics)
         {
-            spriteBatch.DrawString(GuiManager._font, _elementName.ToUpper(),
+            spriteBatch.DrawString(
+                GuiManager._font,
+                _elementName.ToUpper(),
                 new Vector2(0, 8),
-                Color.White);
+                Color.White,
+                0,
+                Vector2.Zero,
+                1f,
+                SpriteEffects.None,
+                0.0001f);
         }
     }   
 }
