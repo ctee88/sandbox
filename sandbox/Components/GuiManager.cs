@@ -23,6 +23,7 @@ namespace sandbox.Components
         private static List<GuiElement> guiElements = new List<GuiElement>();
         private static Texture2D _sand;
         private static Texture2D _water;
+        private static Texture2D _wood;
 
         //private static string hoveredElementName;
         //Default selection
@@ -32,6 +33,8 @@ namespace sandbox.Components
             _font = content.Load<SpriteFont>("File");
             _sand = content.Load<Texture2D>("sand");
             _water = content.Load<Texture2D>("water");
+            _wood = content.Load<Texture2D>("wood");
+
         }
 
         public static void InitialiseGui()
@@ -39,13 +42,14 @@ namespace sandbox.Components
             //Scale the x,y and width+height with ElementMatrix.size_x / graphics.PreferredBackBufferWidth?
             guiElements.Add(new GuiElement(new Rectangle(2, 1, 6, 6), _sand, ElementType.Sand));
             guiElements.Add(new GuiElement(new Rectangle(10, 1, 6, 6), _water, ElementType.Water));
+            guiElements.Add(new GuiElement(new Rectangle(18, 1, 6, 6), _wood, ElementType.Wood));
         }
 
         public static ElementType GetSelectedElementName()
         {
             return selectedElementType;
         }
-        public static void SelectElement(GameTime gameTime, GraphicsDeviceManager graphics)
+        public static void SelectElement(GraphicsDeviceManager graphics)
         {
             _previousMouse = _currentMouse;
             _currentMouse = Mouse.GetState();

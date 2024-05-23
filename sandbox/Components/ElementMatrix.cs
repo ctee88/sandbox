@@ -15,7 +15,7 @@ namespace sandbox.Components
 {
     public class ElementMatrix
     {
-        public const int size_x = 128;
+        public const int size_x = 256;
         public const int size_y = size_x;
         public static Element[,] elements;
         public static float gravity = 0.2f;

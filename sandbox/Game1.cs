@@ -55,7 +55,7 @@ namespace sandbox
                 _elementMatrix.CreateElementMatrix();
             }
 
-            GuiManager.SelectElement(gameTime, _graphics);
+            GuiManager.SelectElement(_graphics);
             Player.Update(gameTime, _graphics);
             _elementMatrix.Move();
             base.Update(gameTime);

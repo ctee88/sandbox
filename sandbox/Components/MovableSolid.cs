@@ -13,7 +13,7 @@ namespace sandbox.Components
         private bool IsSubmerged(int x, int y)
         {
             //Check if the current element is surrounded by water on the sides. Can be changed to liquid in future
-            //depending on properties such as mass/type of liquid etc...
+            //depending on properties such as mass/type of liquid e.g. salt (can dissolve) or oil etc...
             return (ElementMatrix.IsWithinBounds(x - 1, y) && ElementMatrix.elements[x - 1, y] is Water) ||
                    (ElementMatrix.IsWithinBounds(x + 1, y) && ElementMatrix.elements[x + 1, y] is Water);
         }
@@ -39,7 +39,7 @@ namespace sandbox.Components
 
                 if (IsSubmerged(x, y + 1))
                 {
-                    element.velY *= 0.25f;
+                    element.velY *= 0.1f;
                 }
                 return index;
             }
@@ -61,7 +61,7 @@ namespace sandbox.Components
 
                 if (IsSubmerged(x - 1, y + 1))
                 {
-                    element.velY *= 0.25f;
+                    element.velY *= 0.1f;
                 }
                 return index;
             }
@@ -84,7 +84,7 @@ namespace sandbox.Components
 
                 if (IsSubmerged(x + 1, y + 1))
                 {
-                    element.velY *= 0.25f;
+                    element.velY *= 0.1f;
                 }
 
                 return index;
