@@ -25,7 +25,6 @@ namespace sandbox.Components
         private static Texture2D _water;
 
         //private static string hoveredElementName;
-        //private static string selectedElementName = "Sand";
         //Default selection
         private static ElementType selectedElementType = ElementType.Sand;
         public static void LoadTextures(ContentManager content)

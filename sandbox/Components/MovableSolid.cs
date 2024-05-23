@@ -9,12 +9,18 @@ namespace sandbox.Components
 {
     public abstract class MovableSolid : Element
     {
+        //Future Elements may need a similar method - can move this into Element class if required
+        private bool IsSubmerged(int x, int y)
+        {
+            //Check if the current element is surrounded by water on the sides. Can be changed to liquid in future
+            //depending on properties such as mass/type of liquid etc...
+            return (ElementMatrix.IsWithinBounds(x - 1, y) && ElementMatrix.elements[x - 1, y] is Water) ||
+                   (ElementMatrix.IsWithinBounds(x + 1, y) && ElementMatrix.elements[x + 1, y] is Water);
+        }
+
         public override int[] UpdateElementPosition(int x, int y, Element element, bool leftOrRight)
         {
             int[] index = new int[2];
-
-            //Issue here is that I need to swap the positions when a MovableSolid meets a Liquid but the Liquid is not instantiated in this context
-            //Currently makes the previous cell empty (null) and if the next cell was water, it's overwritten as a result
 
             //Directly below
             if (ElementMatrix.IsWithinBounds(x, y + 1) && (ElementMatrix.IsEmptyCell(x, y + 1) || ElementMatrix.elements[x, y + 1] is Water))
@@ -30,6 +36,11 @@ namespace sandbox.Components
                 }
                 index[0] = x;
                 index[1] = y + 1;
+
+                if (IsSubmerged(x, y + 1))
+                {
+                    element.velY *= 0.25f;
+                }
                 return index;
             }
 
@@ -47,6 +58,11 @@ namespace sandbox.Components
                 }
                 index[0] = x - 1;
                 index[1] = y + 1;
+
+                if (IsSubmerged(x - 1, y + 1))
+                {
+                    element.velY *= 0.25f;
+                }
                 return index;
             }
 
@@ -65,6 +81,12 @@ namespace sandbox.Components
                 }
                 index[0] = x + 1;
                 index[1] = y + 1;
+
+                if (IsSubmerged(x + 1, y + 1))
+                {
+                    element.velY *= 0.25f;
+                }
+
                 return index;
             }
 
