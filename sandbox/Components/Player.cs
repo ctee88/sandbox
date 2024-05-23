@@ -36,7 +36,7 @@ namespace sandbox.Components
                 int mouseRow = mouseState.Position.X * ElementMatrix.size_x / graphics.PreferredBackBufferWidth;
                 int mouseCol = mouseState.Position.Y * ElementMatrix.size_y / graphics.PreferredBackBufferHeight;
 
-                int spawnMatrixArea = 5;
+                int spawnMatrixArea = 10;
                 int spawnMatrixSize = spawnMatrixArea / 2;
                 for (int i = -spawnMatrixSize; i <= spawnMatrixSize; i++)
                 {

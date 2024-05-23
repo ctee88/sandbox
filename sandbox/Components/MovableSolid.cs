@@ -19,33 +19,52 @@ namespace sandbox.Components
             //Directly below
             if (ElementMatrix.IsWithinBounds(x, y + 1) && (ElementMatrix.IsEmptyCell(x, y + 1) || ElementMatrix.elements[x, y + 1] is Water))
             {
-                ElementMatrix.elements[x, y + 1] = element;
-                ElementMatrix.elements[x, y] = null;
+                if (ElementMatrix.elements[x, y + 1] is Water)
+                {
+                    ElementMatrix.elements[x, y] = ElementMatrix.elements[x, y + 1];
+                    ElementMatrix.elements[x, y + 1] = element;
+                } else 
+                {
+                    ElementMatrix.elements[x, y] = null;
+                    ElementMatrix.elements[x, y + 1] = element;
+                }
                 index[0] = x;
                 index[1] = y + 1;
-
                 return index;
             }
 
             //Below left
             else if (ElementMatrix.IsWithinBounds(x - 1, y + 1) && (ElementMatrix.IsEmptyCell(x - 1, y + 1) || ElementMatrix.elements[x - 1, y + 1] is Water))
             {
-                ElementMatrix.elements[x - 1, y + 1] = element;
-                ElementMatrix.elements[x, y] = null;
+                if (ElementMatrix.elements[x - 1, y + 1] is Water)
+                {
+                    ElementMatrix.elements[x, y] = ElementMatrix.elements[x - 1, y + 1];
+                    ElementMatrix.elements[x - 1, y + 1] = element;
+                } else
+                {
+                    ElementMatrix.elements[x, y] = null;
+                    ElementMatrix.elements[x - 1, y + 1] = element;
+                }
                 index[0] = x - 1;
                 index[1] = y + 1;
-
                 return index;
             }
 
             //Below right
             else if (ElementMatrix.IsWithinBounds(x + 1, y + 1) && (ElementMatrix.IsEmptyCell(x + 1, y + 1) || ElementMatrix.elements[x + 1, y + 1] is Water))
             {
-                ElementMatrix.elements[x + 1, y + 1] = element;
-                ElementMatrix.elements[x, y] = null;
+                if (ElementMatrix.elements[x + 1, y + 1] is Water)
+                {
+                    ElementMatrix.elements[x, y] = ElementMatrix.elements[x + 1, y + 1];
+                    ElementMatrix.elements[x + 1, y + 1] = element;
+                } else
+                {
+                    ElementMatrix.elements[x, y] = null;
+                    ElementMatrix.elements[x + 1, y + 1] = element;
+
+                }
                 index[0] = x + 1;
                 index[1] = y + 1;
-
                 return index;
             }
 
