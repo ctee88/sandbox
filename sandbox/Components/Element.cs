@@ -51,7 +51,7 @@ namespace sandbox.Components
             isFalling = velY != 0;
         }
         //ElementType or ElementName?
-        //public enum ElementName
+        //public enum ElementType
         //{
         //    Sand,
         //    Water,

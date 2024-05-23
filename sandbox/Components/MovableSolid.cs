@@ -12,8 +12,12 @@ namespace sandbox.Components
         public override int[] UpdateElementPosition(int x, int y, Element element, bool leftOrRight)
         {
             int[] index = new int[2];
+
+            //Issue here is that I need to swap the positions when a MovableSolid meets a Liquid but the Liquid is not instantiated in this context
+            //Currently makes the previous cell empty (null) and if the next cell was water, it's overwritten as a result
+
             //Directly below
-            if (ElementMatrix.IsWithinBounds(x, y + 1) && ElementMatrix.IsEmptyCell(x, y + 1))
+            if (ElementMatrix.IsWithinBounds(x, y + 1) && (ElementMatrix.IsEmptyCell(x, y + 1) || ElementMatrix.elements[x, y + 1] is Water))
             {
                 ElementMatrix.elements[x, y + 1] = element;
                 ElementMatrix.elements[x, y] = null;
@@ -24,7 +28,7 @@ namespace sandbox.Components
             }
 
             //Below left
-            else if (ElementMatrix.IsWithinBounds(x - 1, y + 1) && ElementMatrix.IsEmptyCell(x - 1, y + 1))
+            else if (ElementMatrix.IsWithinBounds(x - 1, y + 1) && (ElementMatrix.IsEmptyCell(x - 1, y + 1) || ElementMatrix.elements[x - 1, y + 1] is Water))
             {
                 ElementMatrix.elements[x - 1, y + 1] = element;
                 ElementMatrix.elements[x, y] = null;
@@ -35,7 +39,7 @@ namespace sandbox.Components
             }
 
             //Below right
-            else if (ElementMatrix.IsWithinBounds(x + 1, y + 1) && ElementMatrix.IsEmptyCell(x + 1, y + 1))
+            else if (ElementMatrix.IsWithinBounds(x + 1, y + 1) && (ElementMatrix.IsEmptyCell(x + 1, y + 1) || ElementMatrix.elements[x + 1, y + 1] is Water))
             {
                 ElementMatrix.elements[x + 1, y + 1] = element;
                 ElementMatrix.elements[x, y] = null;

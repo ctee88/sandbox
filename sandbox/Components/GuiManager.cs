@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,7 +26,8 @@ namespace sandbox.Components
 
         //private static string hoveredElementName;
         //Default selection
-        private static string selectedElementName = "Sand";
+        //private static string selectedElementName = "Sand";
+        private static ElementType selectedElementType = ElementType.Sand;
         public static void LoadTextures(ContentManager content)
         {
             _font = content.Load<SpriteFont>("File");
@@ -36,13 +38,13 @@ namespace sandbox.Components
         public static void InitialiseGui()
         {
             //Scale the x,y and width+height with ElementMatrix.size_x / graphics.PreferredBackBufferWidth?
-            guiElements.Add(new GuiElement(new Rectangle(2, 1, 6, 6), _sand, "Sand"));
-            guiElements.Add(new GuiElement(new Rectangle(10, 1, 6, 6), _water, "Water"));
+            guiElements.Add(new GuiElement(new Rectangle(2, 1, 6, 6), _sand, ElementType.Sand));
+            guiElements.Add(new GuiElement(new Rectangle(10, 1, 6, 6), _water, ElementType.Water));
         }
 
-        public static string GetSelectedElementName()
+        public static ElementType GetSelectedElementName()
         {
-            return selectedElementName;
+            return selectedElementType;
         }
         public static void SelectElement(GameTime gameTime, GraphicsDeviceManager graphics)
         {
@@ -66,7 +68,7 @@ namespace sandbox.Components
 
                     if (_currentMouse.LeftButton == ButtonState.Released && _previousMouse.LeftButton == ButtonState.Pressed)
                     {
-                        selectedElementName = guiElement._elementName;
+                        selectedElementType = guiElement._elementType;
                         Debug.WriteLine("Intersect test working");
                     }
                 }
@@ -79,7 +81,7 @@ namespace sandbox.Components
             {
                 var color = Color.White;
 
-                if (guiElement._elementName == selectedElementName)
+                if (guiElement._elementType == selectedElementType)
                 {
                     color = Color.Gray;
                     guiElement.DrawElementName(spriteBatch, graphics);

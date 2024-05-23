@@ -13,14 +13,14 @@ namespace sandbox.Components
     {
         public Rectangle _destinationRect { get; private set; }
         public Texture2D _texture { get; private set; }
-        public String _elementName { get; private set; }
+        public ElementType _elementType { get; private set; }
         //public bool _isHovering;
         //public bool _isSelected = false;
-        public GuiElement(Rectangle rect, Texture2D texture, String elementName)
+        public GuiElement(Rectangle rect, Texture2D texture, ElementType elementType)
         {
             _destinationRect = rect;
             _texture = texture;
-            _elementName = elementName;
+            _elementType = elementType;
         }
 
         public void Draw(SpriteBatch spriteBatch, Color color)
@@ -32,7 +32,7 @@ namespace sandbox.Components
         {
             spriteBatch.DrawString(
                 GuiManager._font,
-                _elementName.ToUpper(),
+                _elementType.ToString().ToUpper(),
                 new Vector2(0, 8),
                 Color.White,
                 0,

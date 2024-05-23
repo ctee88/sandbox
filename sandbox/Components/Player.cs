@@ -15,11 +15,11 @@ namespace sandbox.Components
     {
         private static int spawnTimer = 0;
         private static Random random = new Random();
-        //Do I want this dict to be in this class? or elsewhere
-        private static Dictionary<string, Type> elementTypes = new Dictionary<string, Type>()
+        //Do I want this dict to be in this class? or elsewhere. Probably better to create an enum in the Element class, this reflection approach seems a bit dumb
+        private static Dictionary<ElementType, Type> elementTypes = new Dictionary<ElementType, Type>()
         {
-            { "Sand", typeof(Sand) },
-            { "Water", typeof(Water) }
+            { ElementType.Sand, typeof(Sand) },
+            { ElementType.Water, typeof(Water) }
         };
 
         //This method needs a better name?
@@ -28,7 +28,7 @@ namespace sandbox.Components
             spawnTimer += gameTime.ElapsedGameTime.Milliseconds;
             var mouseState = Mouse.GetState();
 
-            string selectedElementName = GuiManager.GetSelectedElementName();
+            ElementType selectedElementName = GuiManager.GetSelectedElementName();
 
             if (mouseState.LeftButton == ButtonState.Pressed && spawnTimer > 60)
             {
