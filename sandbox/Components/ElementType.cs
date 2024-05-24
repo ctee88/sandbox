@@ -10,7 +10,8 @@ namespace sandbox.Components
     {
         None,
         Sand,
-        Water
+        Water,
+        Wood
     }
 
 }
