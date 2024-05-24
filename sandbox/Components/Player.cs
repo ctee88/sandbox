@@ -46,55 +46,41 @@ namespace sandbox.Components
                         int row = mouseRow + i;
                         int col = mouseCol + j;
 
-                        //Works for now. Fix on 24/05 please... this is awful wtf
-                        if (selectedElementName.ToString() == "Wood") 
+                        if (elementTypes[selectedElementName].IsSubclassOf(typeof(Solid)))
                         {
-                            if (ElementMatrix.IsWithinBounds(row, col)) //&& ElementMatrix.elements[row, col] == null)
-                            {
-                                //This will execute every single time a new particle is spawned...
-                                //Can this be written in a way in which this code is executed once (when the element is selected)
-                                //And then the element can be spawned normally after without reflection?
-                                if (elementTypes.ContainsKey(selectedElementName))
-                                {
-                                    Type elementType = elementTypes[selectedElementName];
-                                    Element element = (Element)Activator.CreateInstance(elementType);
-                                    ElementMatrix.elements[row, col] = element;
-                                    element.pos = new Vector2(row, col);
-
-                                    if (element.texture == null)
-                                    {
-                                        element.texture = new Texture2D(graphics.GraphicsDevice, 1, 1);
-                                        element.texture.SetData<Color>(new Color[] { element.color });
-                                    }
-                                }
-                            }
+                            SpawnElement(row, col, selectedElementName, graphics);
                         } else
                         {
                             //Amorphous spawning
                             int randomNum = random.Next(0, 4) < 3 ? 1 : 0;
                             if (randomNum == 0)
                             {
-                                if (ElementMatrix.IsWithinBounds(row, col))// && ElementMatrix.elements[row, col] == null)
-                                {
-                                    //This will execute every single time a new particle is spawned...
-                                    //Can this be written in a way in which this code is executed once (when the element is selected)
-                                    //And then the element can be spawned normally after without reflection?
-                                    if (elementTypes.ContainsKey(selectedElementName))
-                                    {
-                                        Type elementType = elementTypes[selectedElementName];
-                                        Element element = (Element)Activator.CreateInstance(elementType);
-                                        ElementMatrix.elements[row, col] = element;
-                                        element.pos = new Vector2(row, col);
-
-                                        if (element.texture == null)
-                                        {
-                                            element.texture = new Texture2D(graphics.GraphicsDevice, 1, 1);
-                                            element.texture.SetData<Color>(new Color[] { element.color });
-                                        }
-                                    }
-                                }
+                                SpawnElement(row, col, selectedElementName, graphics);
                             }
                         }
+                    }
+                }
+            }
+        }
+
+        public static void SpawnElement(int row, int col, ElementType selectedElementName, GraphicsDeviceManager graphics)
+        {
+            if (ElementMatrix.IsWithinBounds(row, col)) //&& ElementMatrix.elements[row, col] == null)
+            {
+                //This will execute every single time a new particle is spawned...
+                //Can this be written in a way in which this code is executed once (when the element is selected)
+                //And then the element can be spawned normally after without reflection?
+                if (elementTypes.ContainsKey(selectedElementName))
+                {
+                    Type elementType = elementTypes[selectedElementName];
+                    Element element = (Element)Activator.CreateInstance(elementType);
+                    ElementMatrix.elements[row, col] = element;
+                    element.pos = new Vector2(row, col);
+
+                    if (element.texture == null)
+                    {
+                        element.texture = new Texture2D(graphics.GraphicsDevice, 1, 1);
+                        element.texture.SetData<Color>(new Color[] { element.color });
                     }
                 }
             }
