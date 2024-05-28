@@ -20,7 +20,8 @@ namespace sandbox.Components
         {
             { ElementType.Sand, typeof(Sand) },
             { ElementType.Water, typeof(Water) },
-            { ElementType.Wood, typeof(Wood) }
+            { ElementType.Wood, typeof(Wood) },
+            { ElementType.Smoke, typeof(Smoke) }
         };
 
         //This method needs a better name?

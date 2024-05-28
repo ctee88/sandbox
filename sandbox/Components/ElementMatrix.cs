@@ -117,5 +117,11 @@ namespace sandbox.Components
             }
             return false;
         }
+
+        //MovableSolids and Liquids should move through
+        public static bool CanMoveThrough(int x, int y)
+        {
+            return IsEmptyCell(x, y) || elements[x, y] is Gas;
+        }
     }
 }

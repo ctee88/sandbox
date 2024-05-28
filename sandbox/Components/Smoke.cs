@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace sandbox.Components
 {
-    public class Wood : Solid
+    public class Smoke : Gas
     {
-        public Wood() 
+        public Smoke() 
         {
-            //isGaseous = false;
-            string elementName = typeof(Wood).Name;
+            //isGaseous = true;
+            maxVelY = 0.2f;
+            string elementName = typeof(Smoke).Name;
             color = ColorConstants.GetElementColor(elementName);
         }
     }

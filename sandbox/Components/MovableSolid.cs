@@ -14,8 +14,8 @@ namespace sandbox.Components
         {
             //Check if the current element is surrounded by water on the sides. Can be changed to liquid in future
             //depending on properties such as mass/type of liquid e.g. salt (can dissolve) or oil etc...
-            return (ElementMatrix.IsWithinBounds(x - 1, y) && ElementMatrix.elements[x - 1, y] is Water) ||
-                   (ElementMatrix.IsWithinBounds(x + 1, y) && ElementMatrix.elements[x + 1, y] is Water);
+            return (ElementMatrix.IsWithinBounds(x - 1, y) && ElementMatrix.elements[x - 1, y] is Liquid) ||
+                   (ElementMatrix.IsWithinBounds(x + 1, y) && ElementMatrix.elements[x + 1, y] is Liquid);
         }
 
         public override int[] UpdateElementPosition(int x, int y, Element element, bool leftOrRight)
@@ -23,9 +23,9 @@ namespace sandbox.Components
             int[] index = new int[2];
 
             //Directly below
-            if (ElementMatrix.IsWithinBounds(x, y + 1) && (ElementMatrix.IsEmptyCell(x, y + 1) || ElementMatrix.elements[x, y + 1] is Water))
+            if (ElementMatrix.IsWithinBounds(x, y + 1) && (ElementMatrix.CanMoveThrough(x, y + 1) || ElementMatrix.elements[x, y + 1] is Liquid))
             {
-                if (ElementMatrix.elements[x, y + 1] is Water)
+                if (ElementMatrix.elements[x, y + 1] is Liquid)
                 {
                     ElementMatrix.elements[x, y] = ElementMatrix.elements[x, y + 1];
                     ElementMatrix.elements[x, y + 1] = element;
@@ -45,9 +45,9 @@ namespace sandbox.Components
             }
 
             //Below left
-            else if (ElementMatrix.IsWithinBounds(x - 1, y + 1) && (ElementMatrix.IsEmptyCell(x - 1, y + 1) || ElementMatrix.elements[x - 1, y + 1] is Water))
+            else if (ElementMatrix.IsWithinBounds(x - 1, y + 1) && (ElementMatrix.CanMoveThrough(x - 1, y + 1) || ElementMatrix.elements[x - 1, y + 1] is Liquid))
             {
-                if (ElementMatrix.elements[x - 1, y + 1] is Water)
+                if (ElementMatrix.elements[x - 1, y + 1] is Liquid)
                 {
                     ElementMatrix.elements[x, y] = ElementMatrix.elements[x - 1, y + 1];
                     ElementMatrix.elements[x - 1, y + 1] = element;
@@ -67,9 +67,9 @@ namespace sandbox.Components
             }
 
             //Below right
-            else if (ElementMatrix.IsWithinBounds(x + 1, y + 1) && (ElementMatrix.IsEmptyCell(x + 1, y + 1) || ElementMatrix.elements[x + 1, y + 1] is Water))
+            else if (ElementMatrix.IsWithinBounds(x + 1, y + 1) && (ElementMatrix.CanMoveThrough(x + 1, y + 1) || ElementMatrix.elements[x + 1, y + 1] is Liquid))
             {
-                if (ElementMatrix.elements[x + 1, y + 1] is Water)
+                if (ElementMatrix.elements[x + 1, y + 1] is Liquid)
                 {
                     ElementMatrix.elements[x, y] = ElementMatrix.elements[x + 1, y + 1];
                     ElementMatrix.elements[x + 1, y + 1] = element;

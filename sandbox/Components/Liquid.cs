@@ -8,10 +8,11 @@ namespace sandbox.Components
         {
             int[] index = new int[2];
             //Directly below
-            if (ElementMatrix.IsWithinBounds(x, y + 1) && ElementMatrix.IsEmptyCell(x, y + 1))
+            if (ElementMatrix.IsWithinBounds(x, y + 1) && ElementMatrix.CanMoveThrough(x, y + 1))
             {
+                ElementMatrix.elements[x, y] = ElementMatrix.elements[x, y + 1];
                 ElementMatrix.elements[x, y + 1] = element;
-                ElementMatrix.elements[x, y] = null;
+                //ElementMatrix.elements[x, y] = null;
                 index[0] = x;
                 index[1] = y + 1;
 
@@ -19,10 +20,11 @@ namespace sandbox.Components
             }
             
             //Below left
-            else if (ElementMatrix.IsWithinBounds(x - 1, y + 1) && ElementMatrix.IsEmptyCell(x - 1, y + 1))
+            else if (ElementMatrix.IsWithinBounds(x - 1, y + 1) && ElementMatrix.CanMoveThrough(x - 1, y + 1))
             {
+                ElementMatrix.elements[x, y] = ElementMatrix.elements[x - 1, y + 1];
                 ElementMatrix.elements[x - 1, y + 1] = element;
-                ElementMatrix.elements[x, y] = null;
+                //ElementMatrix.elements[x, y] = null;
                 index[0] = x - 1;
                 index[1] = y + 1;
 
@@ -30,10 +32,11 @@ namespace sandbox.Components
             }
 
             //Below right
-            else if (ElementMatrix.IsWithinBounds(x + 1, y + 1) && ElementMatrix.IsEmptyCell(x + 1, y + 1))
+            else if (ElementMatrix.IsWithinBounds(x + 1, y + 1) && ElementMatrix.CanMoveThrough(x + 1, y + 1))
             {
+                ElementMatrix.elements[x, y] = ElementMatrix.elements[x + 1, y + 1];
                 ElementMatrix.elements[x + 1, y + 1] = element;
-                ElementMatrix.elements[x, y] = null;
+                //ElementMatrix.elements[x, y] = null;
                 index[0] = x + 1;
                 index[1] = y + 1;
 
@@ -44,21 +47,23 @@ namespace sandbox.Components
             //There is 100% a way to rewrite these if statements, this method is getting quite ugly 
             //as there is a lot of repeated code
             //Left and Right both empty and within bounds
-            else if ((ElementMatrix.IsWithinBounds(x - 1, y) && ElementMatrix.IsEmptyCell(x - 1, y)) &&
-                (ElementMatrix.IsWithinBounds(x + 1, y) && ElementMatrix.IsEmptyCell(x + 1, y)))
+            else if ((ElementMatrix.IsWithinBounds(x - 1, y) && ElementMatrix.CanMoveThrough(x - 1, y)) &&
+                (ElementMatrix.IsWithinBounds(x + 1, y) && ElementMatrix.CanMoveThrough(x + 1, y)))
             {
                 if (leftOrRight == true)
                 {
+                    ElementMatrix.elements[x, y] = ElementMatrix.elements[x - 1, y];
                     ElementMatrix.elements[x - 1, y] = element;
-                    ElementMatrix.elements[x, y] = null;
+                    //ElementMatrix.elements[x, y] = null;
                     index[0] = x - 1;
                     index[1] = y;
 
                     return index;
                 } else //Is it better to be explicit here? leftOrRight == false
                 {
+                    ElementMatrix.elements[x, y] = ElementMatrix.elements[x + 1, y];
                     ElementMatrix.elements[x + 1, y] = element;
-                    ElementMatrix.elements[x, y] = null;
+                    //ElementMatrix.elements[x, y] = null;
                     index[0] = x + 1;
                     index[1] = y;
 
@@ -66,10 +71,11 @@ namespace sandbox.Components
                 }
             }
             //Left
-            else if (ElementMatrix.IsWithinBounds(x - 1, y) && ElementMatrix.IsEmptyCell(x - 1, y))
+            else if (ElementMatrix.IsWithinBounds(x - 1, y) && ElementMatrix.CanMoveThrough(x - 1, y))
             {
+                ElementMatrix.elements[x, y] = ElementMatrix.elements[x - 1, y];
                 ElementMatrix.elements[x - 1, y] = element;
-                ElementMatrix.elements[x, y] = null;
+                //ElementMatrix.elements[x, y] = null;
                 index[0] = x - 1;
                 index[1] = y;
 
@@ -77,10 +83,11 @@ namespace sandbox.Components
             }
 
             //Right
-            else if (ElementMatrix.IsWithinBounds(x + 1, y) && ElementMatrix.IsEmptyCell(x + 1, y))
+            else if (ElementMatrix.IsWithinBounds(x + 1, y) && ElementMatrix.CanMoveThrough(x + 1, y))
             {
+                ElementMatrix.elements[x, y] = ElementMatrix.elements[x + 1, y];
                 ElementMatrix.elements[x + 1, y] = element;
-                ElementMatrix.elements[x, y] = null;
+                //ElementMatrix.elements[x, y] = null;
                 index[0] = x + 1;
                 index[1] = y;
 
