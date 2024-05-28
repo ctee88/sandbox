@@ -11,7 +11,7 @@ namespace sandbox.Components
         None,
         Sand,
         Water,
-        Wood
+        Wood,
+        Smoke
     }
-
 }

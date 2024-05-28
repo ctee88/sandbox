@@ -24,6 +24,7 @@ namespace sandbox.Components
         private static Texture2D _sand;
         private static Texture2D _water;
         private static Texture2D _wood;
+        private static Texture2D _smoke;
 
         //private static string hoveredElementName;
         //Default selection
@@ -34,7 +35,7 @@ namespace sandbox.Components
             _sand = content.Load<Texture2D>("sand");
             _water = content.Load<Texture2D>("water");
             _wood = content.Load<Texture2D>("wood");
-
+            _smoke = content.Load<Texture2D>("smoke");
         }
 
         public static void InitialiseGui()
@@ -43,6 +44,7 @@ namespace sandbox.Components
             guiElements.Add(new GuiElement(new Rectangle(2, 1, 6, 6), _sand, ElementType.Sand));
             guiElements.Add(new GuiElement(new Rectangle(10, 1, 6, 6), _water, ElementType.Water));
             guiElements.Add(new GuiElement(new Rectangle(18, 1, 6, 6), _wood, ElementType.Wood));
+            guiElements.Add(new GuiElement(new Rectangle(26, 1, 6, 6), _smoke, ElementType.Smoke));
         }
 
         public static ElementType GetSelectedElementName()

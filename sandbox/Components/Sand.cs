@@ -11,8 +11,7 @@ namespace sandbox.Components
     {
         public Sand() 
         {
-            //Different vels and other forces specific to sand later on in development will be
-            //constructed within this class (same for other elements)
+            maxVelY = 2;
             string elementName = typeof(Sand).Name;
             color = ColorConstants.GetElementColor(elementName);
         }

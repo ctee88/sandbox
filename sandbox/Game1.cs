@@ -13,6 +13,7 @@ namespace sandbox
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private ElementMatrix _elementMatrix = new ElementMatrix();
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -66,9 +67,10 @@ namespace sandbox
         {
             SpriteBatch targetBatch = new SpriteBatch(GraphicsDevice);
             RenderTarget2D target = new RenderTarget2D(GraphicsDevice, ElementMatrix.size_x, ElementMatrix.size_y);
+
             GraphicsDevice.SetRenderTarget(target);
 
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
             _elementMatrix.DrawMatrix(ElementMatrix.elements, _spriteBatch);
@@ -80,7 +82,7 @@ namespace sandbox
             GraphicsDevice.SetRenderTarget(null);
 
             // Render target to back buffer.
-            targetBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone);
+            targetBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone);
             targetBatch.Draw(target, new Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight), Color.White);
             targetBatch.End();
 

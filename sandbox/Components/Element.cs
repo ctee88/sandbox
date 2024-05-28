@@ -10,17 +10,23 @@ namespace sandbox.Components
 {
     public abstract class Element
     {
-        public Color color; //null
-        public Texture2D texture; //null
+        public Color color; 
+        public Texture2D texture; 
 
         public Vector2 pos = new Vector2(0, 0);
         //public float velX = 0; don't think velX will be used
         public float velY = 0f;
-        public int maxVelY = 4; //If you want maxVelY to differ between elements, UpdateElementVelocity() will become virtual
+        public float maxVelY; 
         public bool isFalling = true;
-
+        public int lifeSpan;
+        public int lifeRemaining;
         public abstract int[] UpdateElementPosition(int x, int y, Element element, bool leftOrRight);
 
+        public virtual void UpdateElementLifeRemaining(int x, int y)
+        {
+            //Do nothing, unless an Element has behaviour involving lifespan (eg smoke, fire)
+            //Seems hacky... what am I doing??
+        }
         public void UpdateElementVelocity()
         {
             float newVelY = velY + ElementMatrix.gravity;
@@ -50,5 +56,11 @@ namespace sandbox.Components
             UpdateElementVelocity();
             isFalling = velY != 0;
         }
+
+        //MovableSolids and Liquids should move through gases
+        //public bool CanMoveThrough(int x, int y)
+        //{
+        //    return ((ElementMatrix.IsEmptyCell(x, y)) || (ElementMatrix.elements[x, y] is Gas));
+        //}
     }
 }

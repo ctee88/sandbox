@@ -10,6 +10,7 @@ namespace sandbox.Components
     {
         public Water() 
         {
+            maxVelY = 2;
             string elementName = typeof(Water).Name;
             color = ColorConstants.GetElementColor(elementName);
         }

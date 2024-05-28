@@ -44,7 +44,7 @@ namespace sandbox.Components
                 {
                     Element element = elements[x, y];
 
-                    if (element != null) 
+                    if (!IsEmptyCell(x, y)) 
                     {
                         element.CheckIfFalling();
 
@@ -52,6 +52,8 @@ namespace sandbox.Components
                         {
                             continue;
                         }
+
+                        element.UpdateElementLifeRemaining(x, y);
 
                         for (int i = 0; i < element.GetUpdateCount(); i++)
                         {
@@ -90,7 +92,7 @@ namespace sandbox.Components
                         spritebatch.Draw(element.texture,
                             element.pos,
                             null,
-                            Color.White,
+                            element.color,
                             0,
                             Vector2.Zero,
                             1.0f,
@@ -116,6 +118,17 @@ namespace sandbox.Components
                 return true;
             }
             return false;
+        }
+
+        //MovableSolids and Liquids should move through Gases
+        public static bool CanMoveThrough(int x, int y)
+        {
+            return IsEmptyCell(x, y) || elements[x, y] is Gas;
+        }
+
+        public static void Kill(int x, int y)
+        {
+            elements[x, y] = null;
         }
     }
 }
