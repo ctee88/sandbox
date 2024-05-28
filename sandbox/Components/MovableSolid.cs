@@ -25,15 +25,9 @@ namespace sandbox.Components
             //Directly below
             if (ElementMatrix.IsWithinBounds(x, y + 1) && (ElementMatrix.CanMoveThrough(x, y + 1) || ElementMatrix.elements[x, y + 1] is Liquid))
             {
-                if (ElementMatrix.elements[x, y + 1] is Liquid)
-                {
-                    ElementMatrix.elements[x, y] = ElementMatrix.elements[x, y + 1];
-                    ElementMatrix.elements[x, y + 1] = element;
-                } else 
-                {
-                    ElementMatrix.elements[x, y] = null;
-                    ElementMatrix.elements[x, y + 1] = element;
-                }
+                ElementMatrix.elements[x, y] = ElementMatrix.elements[x, y + 1];
+                ElementMatrix.elements[x, y + 1] = element;
+
                 index[0] = x;
                 index[1] = y + 1;
 
@@ -47,15 +41,9 @@ namespace sandbox.Components
             //Below left
             else if (ElementMatrix.IsWithinBounds(x - 1, y + 1) && (ElementMatrix.CanMoveThrough(x - 1, y + 1) || ElementMatrix.elements[x - 1, y + 1] is Liquid))
             {
-                if (ElementMatrix.elements[x - 1, y + 1] is Liquid)
-                {
-                    ElementMatrix.elements[x, y] = ElementMatrix.elements[x - 1, y + 1];
-                    ElementMatrix.elements[x - 1, y + 1] = element;
-                } else
-                {
-                    ElementMatrix.elements[x, y] = null;
-                    ElementMatrix.elements[x - 1, y + 1] = element;
-                }
+                ElementMatrix.elements[x, y] = ElementMatrix.elements[x - 1, y + 1];
+                ElementMatrix.elements[x - 1, y + 1] = element;
+
                 index[0] = x - 1;
                 index[1] = y + 1;
 
@@ -69,16 +57,9 @@ namespace sandbox.Components
             //Below right
             else if (ElementMatrix.IsWithinBounds(x + 1, y + 1) && (ElementMatrix.CanMoveThrough(x + 1, y + 1) || ElementMatrix.elements[x + 1, y + 1] is Liquid))
             {
-                if (ElementMatrix.elements[x + 1, y + 1] is Liquid)
-                {
-                    ElementMatrix.elements[x, y] = ElementMatrix.elements[x + 1, y + 1];
-                    ElementMatrix.elements[x + 1, y + 1] = element;
-                } else
-                {
-                    ElementMatrix.elements[x, y] = null;
-                    ElementMatrix.elements[x + 1, y + 1] = element;
+                ElementMatrix.elements[x, y] = ElementMatrix.elements[x + 1, y + 1];
+                ElementMatrix.elements[x + 1, y + 1] = element;
 
-                }
                 index[0] = x + 1;
                 index[1] = y + 1;
 
@@ -86,7 +67,6 @@ namespace sandbox.Components
                 {
                     element.velY *= 0.1f;
                 }
-
                 return index;
             }
 
