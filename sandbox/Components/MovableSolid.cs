@@ -12,6 +12,9 @@ namespace sandbox.Components
         //Future Elements may need a similar method - can move this into Element class if required
         private bool IsSubmerged(int x, int y)
         {
+            //TODO: Change this approach/Fix the check. Not working as intended as this method currently doesn't account
+            //for when sand is falling in groups and adjacent to each other when sinking in water.
+
             //Check if the current element is surrounded by water on the sides. Can be changed to liquid in future
             //depending on properties such as mass/type of liquid e.g. salt (can dissolve) or oil etc...
             return (ElementMatrix.IsWithinBounds(x - 1, y) && ElementMatrix.elements[x - 1, y] is Liquid) ||

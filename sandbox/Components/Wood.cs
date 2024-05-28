@@ -10,7 +10,6 @@ namespace sandbox.Components
     {
         public Wood() 
         {
-            //isGaseous = false;
             string elementName = typeof(Wood).Name;
             color = ColorConstants.GetElementColor(elementName);
         }

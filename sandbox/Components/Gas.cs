@@ -15,7 +15,6 @@ namespace sandbox.Components
             //Directly above
             if (ElementMatrix.IsWithinBounds(x, y - 1) && (ElementMatrix.IsEmptyCell(x, y - 1)))
             {
-                //Only accounts for empty cells - might get trapped in liquid and movable solids
                 //ElementMatrix.elements[x, y] = null;
                 ElementMatrix.elements[x, y] = ElementMatrix.elements[x, y - 1];
                 ElementMatrix.elements[x, y - 1] = element;

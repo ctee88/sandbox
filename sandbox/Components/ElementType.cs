@@ -14,5 +14,4 @@ namespace sandbox.Components
         Wood,
         Smoke
     }
-
 }

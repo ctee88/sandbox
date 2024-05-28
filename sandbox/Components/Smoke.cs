@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +12,30 @@ namespace sandbox.Components
     {
         public Smoke() 
         {
-            //isGaseous = true;
+            lifeSpan = 400 + (int)(400 * new Random().NextDouble());
+            lifeRemaining = lifeSpan;
             maxVelY = 0.2f;
             string elementName = typeof(Smoke).Name;
             color = ColorConstants.GetElementColor(elementName);
+        }
+
+        public override void UpdateElementLifeRemaining(int x, int y)
+        {
+            if (lifeRemaining <= 0)
+            {
+                ElementMatrix.Kill(x, y);
+            }
+            else
+            {
+                lifeRemaining = Math.Abs(lifeRemaining - 1);
+                UpdateColor();
+            }
+        }
+
+        public void UpdateColor()
+        {
+            float percent = (float)lifeRemaining / lifeSpan;
+            color = new Color(color.R, color.G, color.B, (byte)(255.0f * percent));
         }
     }
 }
