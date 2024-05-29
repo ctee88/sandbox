@@ -21,7 +21,8 @@ namespace sandbox.Components
             { ElementType.Sand, typeof(Sand) },
             { ElementType.Water, typeof(Water) },
             { ElementType.Wood, typeof(Wood) },
-            { ElementType.Smoke, typeof(Smoke) }
+            { ElementType.Smoke, typeof(Smoke) },
+            { ElementType.Cinder, typeof(Cinder) }
         };
 
         //This method needs a better name?
@@ -32,6 +33,8 @@ namespace sandbox.Components
 
             ElementType selectedElementName = GuiManager.GetSelectedElementName();
 
+            //TODO: Remove spawnTimer check for Solids so that there are less gaps when spawning Solids
+            //TODO: Fix elements spawning behind UI when player clicks an element box
             if (mouseState.LeftButton == ButtonState.Pressed && spawnTimer > 50)
             {
                 spawnTimer = 0;

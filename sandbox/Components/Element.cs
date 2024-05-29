@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace sandbox.Components
 {
@@ -12,6 +13,7 @@ namespace sandbox.Components
     {
         public Color color; 
         public Texture2D texture; 
+        //public GraphicsDeviceManager graphics;
 
         public Vector2 pos = new Vector2(0, 0);
         //public float velX = 0; don't think velX will be used
@@ -20,6 +22,12 @@ namespace sandbox.Components
         public bool isFalling = true;
         public int lifeSpan;
         public int lifeRemaining;
+        
+        //public void SetElementTexture(GraphicsDeviceManager graphics)
+        //{
+        //    texture = new Texture2D(graphics.GraphicsDevice, 1, 1);
+        //    texture.SetData<Color>(new Color[] { color });
+        //}
         public abstract int[] UpdateElementPosition(int x, int y, Element element, bool leftOrRight);
 
         public virtual void UpdateElementLifeRemaining(int x, int y)
