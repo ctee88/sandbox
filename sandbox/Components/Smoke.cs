@@ -10,14 +10,14 @@ namespace sandbox.Components
 {
     public class Smoke : Gas
     {
-        public Smoke() 
+        public Smoke(GraphicsDeviceManager graphics) : base(graphics)
         {
             lifeSpan = 400 + (int)(400 * new Random().NextDouble());
             lifeRemaining = lifeSpan;
             maxVelY = 0.2f;
             string elementName = typeof(Smoke).Name;
             color = ColorConstants.GetElementColor(elementName);
-            //SetElementTexture(new GraphicsDeviceManager(this));//texture.SetData<Color>(new Color[] { color });
+            SetElementTexture(graphics);
         }
 
         public override void UpdateElementLifeRemaining(int x, int y)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace sandbox.Components
 {
     public abstract class MovableSolid : Element
     {
+        
+        protected MovableSolid(GraphicsDeviceManager graphics) : base(graphics) { }
         //Future Elements may need a similar method - can move this into Element class if required
         private bool IsSubmerged(int x, int y)
         {

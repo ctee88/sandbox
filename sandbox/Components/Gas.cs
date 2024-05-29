@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace sandbox.Components
 {
     public abstract class Gas : Element
     {
+        protected Gas(GraphicsDeviceManager graphics) : base(graphics) { }
         public override int[] UpdateElementPosition(int x, int y, Element element, bool leftOrRight)
         {
             int[] index = new int[2];

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,21 +10,21 @@ namespace sandbox.Components
     public class Cinder : MovableSolid
     {
         private string elementName = typeof(Cinder).Name;
-        public Cinder()
+        public Cinder(GraphicsDeviceManager graphics) : base(graphics)
         {
-            lifeSpan = 10; //+ (int)(600 * new Random().NextDouble());
+            lifeSpan = 600 + (int)(600 * new Random().NextDouble());
             lifeRemaining = lifeSpan;
             maxVelY = 1f;
             //Set initial color
             color = ColorConstants.GetElementColor(elementName);
+            SetElementTexture(graphics);
         }
 
         public override void UpdateElementLifeRemaining(int x, int y)
         {
             if (lifeRemaining <= 0)
             {
-                ElementMatrix.elements[x, y] = new Smoke();
-                //Player.SpawnElement(x, y, ElementType.Smoke, graphics);
+                ElementMatrix.elements[x, y] = Player.CreateElement(typeof(Smoke), graphics);
             } else
             {
                 lifeRemaining = Math.Abs(lifeRemaining - 1);

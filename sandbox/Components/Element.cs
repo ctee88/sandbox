@@ -12,8 +12,8 @@ namespace sandbox.Components
     public abstract class Element
     {
         public Color color; 
-        public Texture2D texture; 
-        //public GraphicsDeviceManager graphics;
+        public Texture2D texture;
+        public GraphicsDeviceManager graphics;
 
         public Vector2 pos = new Vector2(0, 0);
         //public float velX = 0; don't think velX will be used
@@ -23,11 +23,16 @@ namespace sandbox.Components
         public int lifeSpan;
         public int lifeRemaining;
         
-        //public void SetElementTexture(GraphicsDeviceManager graphics)
-        //{
-        //    texture = new Texture2D(graphics.GraphicsDevice, 1, 1);
-        //    texture.SetData<Color>(new Color[] { color });
-        //}
+        protected Element(GraphicsDeviceManager graphics)
+        {
+            this.graphics = graphics;
+        }
+
+        public void SetElementTexture(GraphicsDeviceManager graphics)
+        {
+            texture = new Texture2D(graphics.GraphicsDevice, 1, 1);
+            texture.SetData<Color>(new Color[] { color });
+        }
         public abstract int[] UpdateElementPosition(int x, int y, Element element, bool leftOrRight);
 
         public virtual void UpdateElementLifeRemaining(int x, int y)

@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace sandbox.Components
 {
 	public abstract class Liquid : Element
 	{
+        protected Liquid(GraphicsDeviceManager graphics) : base(graphics) { }
         public override int[] UpdateElementPosition(int x, int y, Element element, bool leftOrRight)
         {
             int[] index = new int[2];

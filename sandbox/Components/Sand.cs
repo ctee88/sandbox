@@ -9,11 +9,12 @@ namespace sandbox.Components
 {
     public class Sand : MovableSolid
     {
-        public Sand() 
+        public Sand(GraphicsDeviceManager graphics) : base(graphics)
         {
             maxVelY = 2;
             string elementName = typeof(Sand).Name;
             color = ColorConstants.GetElementColor(elementName);
+            SetElementTexture(graphics);
         }
     }
 }
