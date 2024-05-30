@@ -28,6 +28,8 @@ namespace sandbox.Components
             this.graphics = graphics;
         }
 
+        //TODO: Figure out how to set the Color and Texture in the Element constructor (using the ElementName/ElementType??)
+        //Ideally, want this set in this base class instead of all the child classes
         public void SetElementTexture(GraphicsDeviceManager graphics)
         {
             texture = new Texture2D(graphics.GraphicsDevice, 1, 1);
