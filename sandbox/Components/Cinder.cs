@@ -38,5 +38,7 @@ namespace sandbox.Components
             //TODO: Maybe check color before swapping so that the new color is not the same as the old?
             color = ColorConstants.GetElementColor(elementName);
         }
+
+        //TODO: ApplyHeat()/Ignite() - Method to check neighbours and apply heat accordingly (can apply heat to flammable elements' lifeSpan?)
     }
 }
