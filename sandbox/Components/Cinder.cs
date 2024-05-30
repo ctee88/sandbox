@@ -35,6 +35,7 @@ namespace sandbox.Components
         public void UpdateColor()
         {
             //Called as LifeRemaining decreases - create fire flickering effect
+            //TODO: Maybe check color before swapping so that the new color is not the same as the old?
             color = ColorConstants.GetElementColor(elementName);
         }
     }
