@@ -35,7 +35,7 @@ namespace sandbox.Components
 
             //TODO: Remove spawnTimer check for Solids so that there are less gaps when spawning Solids
             //TODO: Fix elements spawning behind UI when player clicks an element box
-            if (mouseState.LeftButton == ButtonState.Pressed && spawnTimer > 50)
+            if (mouseState.LeftButton == ButtonState.Pressed && spawnTimer > 40)
             {
                 spawnTimer = 0;
                 int mouseRow = mouseState.Position.X * ElementMatrix.size_x / graphics.PreferredBackBufferWidth;

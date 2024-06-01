@@ -47,13 +47,12 @@ namespace sandbox.Components
                     if (!IsEmptyCell(x, y)) 
                     {
                         element.CheckIfFalling();
+                        element.UpdateElementLifeRemaining(x, y);
 
                         if (!element.isFalling)// && element is MovableSolid) This seems wrong, might get caught out in the future... Wtf do I even need this?
                         {
                             continue;
                         }
-
-                        element.UpdateElementLifeRemaining(x, y);
 
                         for (int i = 0; i < element.GetUpdateCount(); i++)
                         {

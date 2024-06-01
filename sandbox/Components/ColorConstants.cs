@@ -22,7 +22,6 @@ namespace sandbox.Components
         private static Color CINDER_3 = new Color(255, 255, 0);
 
         //Immovable Solids
-        //TODO: Add 2 more Colors for Wood - looks a bit weird with one shade of brown
         private static Color WOOD_1 = new Color(136, 104, 20);
         private static Color WOOD_2 = new Color(170, 130, 25);
         private static Color WOOD_3 = new Color(108, 72, 36);

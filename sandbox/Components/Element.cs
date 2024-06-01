@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Diagnostics;
 
 namespace sandbox.Components
 {
@@ -16,12 +17,16 @@ namespace sandbox.Components
         public GraphicsDeviceManager graphics;
 
         public Vector2 pos = new Vector2(0, 0);
-        //public float velX = 0; don't think velX will be used
+        //public float velX = 0; will need velX for more realistic falling physics
         public float velY = 0f;
         public float maxVelY; 
         public bool isFalling = true;
         public int lifeSpan;
         public int lifeRemaining;
+        public bool burning = false;
+        public bool isFlammable;
+        public int heatResistance;
+        public int heatDamage;
         
         protected Element(GraphicsDeviceManager graphics)
         {
@@ -73,10 +78,44 @@ namespace sandbox.Components
             isFalling = velY != 0;
         }
 
-        //MovableSolids and Liquids should move through gases
-        //public bool CanMoveThrough(int x, int y)
-        //{
-        //    return ((ElementMatrix.IsEmptyCell(x, y)) || (ElementMatrix.elements[x, y] is Gas));
-        //}
+        public void ReceiveHeat()
+        {
+            heatResistance -= heatDamage;
+            CheckIfBurning();
+        }
+
+        public void CheckIfBurning()
+        {
+            if (heatResistance <= 0)
+            {
+                burning = true;
+                GetIgnitedColor();
+                lifeRemaining -= heatDamage;
+            }
+        }
+        //TODO: Maybe check color before setting so that the new color is not the same as the old?
+        public void GetIgnitedColor()
+        {
+            color = ColorConstants.GetElementColor("Cinder");
+        }
+
+        //What if we use an instance of element (Cinder) to apply heat instead of Wood.heatDamage?
+        public void ApplyHeatToNeighbours(int ElementX, int ElementY)
+        {
+            for (int i = ElementX - 1; i <= ElementX + 1; i++)
+            {
+                for (int j = ElementY - 1; j <= ElementY + 1; j++)
+                {
+                    if (ElementMatrix.IsWithinBounds(i, j) && !ElementMatrix.IsEmptyCell(i, j))
+                    {
+                        Element neighbour = ElementMatrix.elements[i, j];
+                        if (neighbour.isFlammable)
+                        {
+                            neighbour.ReceiveHeat();
+                        }
+                    }
+                }
+            }
+        }
     }
 }

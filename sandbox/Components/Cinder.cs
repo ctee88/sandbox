@@ -18,6 +18,8 @@ namespace sandbox.Components
             //Set initial color
             color = ColorConstants.GetElementColor(elementName);
             SetElementTexture(graphics);
+            burning = true;
+            //heatDamage = 2;
         }
 
         public override void UpdateElementLifeRemaining(int x, int y)
@@ -28,17 +30,9 @@ namespace sandbox.Components
             } else
             {
                 lifeRemaining = Math.Abs(lifeRemaining - 1);
-                UpdateColor();
+                GetIgnitedColor();
+                ApplyHeatToNeighbours(x, y);
             }
         }
-
-        public void UpdateColor()
-        {
-            //Called as LifeRemaining decreases - create fire flickering effect
-            //TODO: Maybe check color before swapping so that the new color is not the same as the old?
-            color = ColorConstants.GetElementColor(elementName);
-        }
-
-        //TODO: ApplyHeat()/Ignite() - Method to check neighbours and apply heat accordingly (can apply heat to flammable elements' lifeSpan?)
     }
 }
