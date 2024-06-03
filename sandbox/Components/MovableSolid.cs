@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -9,11 +10,13 @@ namespace sandbox.Components
 {
     public abstract class MovableSolid : Element
     {
+        
+        protected MovableSolid(GraphicsDeviceManager graphics) : base(graphics) { }
         //Future Elements may need a similar method - can move this into Element class if required
         private bool IsSubmerged(int x, int y)
         {
             //TODO: Change this approach/Fix the check. Not working as intended as this method currently doesn't account
-            //for when sand is falling in groups and adjacent to each other when sinking in water.
+            //for when MovableSolids fall in groups and are adjacent to each other when sinking in water - velY doesn't slow down.
 
             //Check if the current element is surrounded by water on the sides. Can be changed to liquid in future
             //depending on properties such as mass/type of liquid e.g. salt (can dissolve) or oil etc...

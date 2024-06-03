@@ -15,13 +15,14 @@ namespace sandbox.Components
     {
         private static int spawnTimer = 0;
         private static Random random = new Random();
-        //Do I want this dict to be in this class? or elsewhere. Probably better to place this dict in a class which uses the ElementType enum?
+        //TODO: Figure this shit out --> Do I want this dict to be in this class? or elsewhere. Probably better to place this dict in a class which uses the ElementType enum?
         private static Dictionary<ElementType, Type> elementTypes = new Dictionary<ElementType, Type>()
         {
             { ElementType.Sand, typeof(Sand) },
             { ElementType.Water, typeof(Water) },
             { ElementType.Wood, typeof(Wood) },
-            { ElementType.Smoke, typeof(Smoke) }
+            { ElementType.Smoke, typeof(Smoke) },
+            { ElementType.Cinder, typeof(Cinder) }
         };
 
         //This method needs a better name?
@@ -32,7 +33,9 @@ namespace sandbox.Components
 
             ElementType selectedElementName = GuiManager.GetSelectedElementName();
 
-            if (mouseState.LeftButton == ButtonState.Pressed && spawnTimer > 50)
+            //TODO: Remove spawnTimer check for Solids so that there are less gaps when spawning Solids
+            //TODO: Fix elements spawning behind UI when player clicks an element box
+            if (mouseState.LeftButton == ButtonState.Pressed && spawnTimer > 40)
             {
                 spawnTimer = 0;
                 int mouseRow = mouseState.Position.X * ElementMatrix.size_x / graphics.PreferredBackBufferWidth;
@@ -74,17 +77,17 @@ namespace sandbox.Components
                 if (elementTypes.ContainsKey(selectedElementName))
                 {
                     Type elementType = elementTypes[selectedElementName];
-                    Element element = (Element)Activator.CreateInstance(elementType);
+                    Element element = CreateElement(elementType, graphics);
                     ElementMatrix.elements[row, col] = element;
                     element.pos = new Vector2(row, col);
-
-                    if (element.texture == null)
-                    {
-                        element.texture = new Texture2D(graphics.GraphicsDevice, 1, 1);
-                        element.texture.SetData<Color>(new Color[] { element.color });
-                    }
                 }
             }
+        }
+
+        //TODO: Makes more sense to move this to Element class or the class handling elementTypes
+        public static Element CreateElement(Type elementType, GraphicsDeviceManager graphics)
+        {
+            return (Element)Activator.CreateInstance(elementType, graphics);
         }
     }
 }

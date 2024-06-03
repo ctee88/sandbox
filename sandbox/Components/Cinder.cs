@@ -1,42 +1,38 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace sandbox.Components
 {
-    public class Smoke : Gas
+    public class Cinder : MovableSolid
     {
-        public Smoke(GraphicsDeviceManager graphics) : base(graphics)
+        private string elementName = typeof(Cinder).Name;
+        public Cinder(GraphicsDeviceManager graphics) : base(graphics)
         {
-            lifeSpan = 400 + (int)(400 * new Random().NextDouble());
+            lifeSpan = 600 + (int)(600 * new Random().NextDouble());
             lifeRemaining = lifeSpan;
-            maxVelY = 0.2f;
-            string elementName = typeof(Smoke).Name;
+            maxVelY = 1f;
+            //Set initial color
             color = ColorConstants.GetElementColor(elementName);
             SetElementTexture(graphics);
+            burning = true;
+            //heatDamage = 2;
         }
 
         public override void UpdateElementLifeRemaining(int x, int y)
         {
             if (lifeRemaining <= 0)
             {
-                ElementMatrix.Kill(x, y);
-            }
-            else
+                ElementMatrix.elements[x, y] = Player.CreateElement(typeof(Smoke), graphics);
+            } else
             {
                 lifeRemaining = Math.Abs(lifeRemaining - 1);
-                UpdateColor();
+                GetIgnitedColor();
+                ApplyHeatToNeighbours(x, y);
             }
-        }
-
-        public void UpdateColor()
-        {
-            float percent = (float)lifeRemaining / lifeSpan;
-            color = new Color(color.R, color.G, color.B, (byte)(255.0f * percent));
         }
     }
 }

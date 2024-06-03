@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,12 @@ namespace sandbox.Components
 {
     public class Water : Liquid
     {
-        public Water() 
+        public Water(GraphicsDeviceManager graphics) : base(graphics)
         {
             maxVelY = 2;
             string elementName = typeof(Water).Name;
             color = ColorConstants.GetElementColor(elementName);
+            SetElementTexture(graphics);
         }
     }
 }

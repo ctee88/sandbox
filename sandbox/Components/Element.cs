@@ -5,21 +5,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Diagnostics;
 
 namespace sandbox.Components
 {
     public abstract class Element
     {
         public Color color; 
-        public Texture2D texture; 
+        public Texture2D texture;
+        public GraphicsDeviceManager graphics;
 
         public Vector2 pos = new Vector2(0, 0);
-        //public float velX = 0; don't think velX will be used
+        //public float velX = 0; will need velX for more realistic falling physics
         public float velY = 0f;
         public float maxVelY; 
         public bool isFalling = true;
         public int lifeSpan;
         public int lifeRemaining;
+        public bool burning = false;
+        public bool isIgnited = false;
+        public bool isFlammable;
+        public int heatResistance;
+        public int heatDamage;
+        
+        protected Element(GraphicsDeviceManager graphics)
+        {
+            this.graphics = graphics;
+        }
+
+        //TODO: Figure out how to set the Color and Texture in the Element constructor (using the ElementName/ElementType??)
+        //Ideally, want this set in this base class instead of all the child classes
+        //Currently setting Color from child class Name, then setting Texture from this value.
+        public void SetElementTexture(GraphicsDeviceManager graphics)
+        {
+            texture = new Texture2D(graphics.GraphicsDevice, 1, 1);
+            texture.SetData<Color>(new Color[] { color });
+        }
         public abstract int[] UpdateElementPosition(int x, int y, Element element, bool leftOrRight);
 
         public virtual void UpdateElementLifeRemaining(int x, int y)
@@ -57,10 +79,52 @@ namespace sandbox.Components
             isFalling = velY != 0;
         }
 
-        //MovableSolids and Liquids should move through gases
-        //public bool CanMoveThrough(int x, int y)
-        //{
-        //    return ((ElementMatrix.IsEmptyCell(x, y)) || (ElementMatrix.elements[x, y] is Gas));
-        //}
+        public void ReceiveHeat()
+        {
+            heatResistance -= heatDamage;
+            CheckIfBurning();
+        }
+
+        public void CheckIfBurning()
+        {
+            if (heatResistance <= 0 && !isIgnited)
+            {
+                burning = true;
+                isIgnited = true;
+                //Needs Cinder color initially to set texture to burning when a particle starts burning
+                GetIgnitedColor();
+                SetElementTexture(graphics);
+            }
+            if (burning)
+            {
+                lifeRemaining -= heatDamage;
+                //Keep cycling Cinder colors
+                GetIgnitedColor();
+            }
+        }
+        //TODO: Maybe check color before setting so that the new color is not the same as the old?
+        public void GetIgnitedColor()
+        {
+            color = ColorConstants.GetElementColor("Cinder");
+        }
+
+        //What if we use an instance of element (Cinder) to apply heat instead of Wood.heatDamage?
+        public void ApplyHeatToNeighbours(int ElementX, int ElementY)
+        {
+            for (int i = ElementX - 1; i <= ElementX + 1; i++)
+            {
+                for (int j = ElementY - 1; j <= ElementY + 1; j++)
+                {
+                    if (ElementMatrix.IsWithinBounds(i, j) && !ElementMatrix.IsEmptyCell(i, j))
+                    {
+                        Element neighbour = ElementMatrix.elements[i, j];
+                        if (neighbour.isFlammable)
+                        {
+                            neighbour.ReceiveHeat();
+                        }
+                    }
+                }
+            }
+        }
     }
 }
