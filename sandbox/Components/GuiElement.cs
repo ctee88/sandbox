@@ -34,7 +34,7 @@ namespace sandbox.Components
                 GuiManager._font,
                 _elementType.ToString().ToUpper(),
                 new Vector2(0, 8),
-                Color.Black,
+                Color.White,
                 0,
                 Vector2.Zero,
                 1f,

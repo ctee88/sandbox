@@ -70,9 +70,9 @@ namespace sandbox
 
             GraphicsDevice.SetRenderTarget(target);
 
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
-            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
+            _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp);
             _elementMatrix.DrawMatrix(ElementMatrix.elements, _spriteBatch);
             GuiManager.Draw(_spriteBatch, _graphics);
 
@@ -82,7 +82,7 @@ namespace sandbox
             GraphicsDevice.SetRenderTarget(null);
 
             // Render target to back buffer.
-            targetBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone);
+            targetBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone);
             targetBatch.Draw(target, new Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight), Color.White);
             targetBatch.End();
 

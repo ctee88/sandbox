@@ -17,7 +17,7 @@ namespace sandbox.Components
             string elementName = typeof(Wood).Name;
             color = ColorConstants.GetElementColor(elementName);
             SetElementTexture(graphics);
-            lifeRemaining = 300 + (int)(300 * new Random().NextDouble());
+            lifeRemaining = 400 + (int)(400 * new Random().NextDouble());
             isFlammable = true;
             heatResistance = 200;
             heatDamage = 2;

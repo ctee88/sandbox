@@ -24,6 +24,7 @@ namespace sandbox.Components
         public int lifeSpan;
         public int lifeRemaining;
         public bool burning = false;
+        public bool isIgnited = false;
         public bool isFlammable;
         public int heatResistance;
         public int heatDamage;
@@ -86,11 +87,19 @@ namespace sandbox.Components
 
         public void CheckIfBurning()
         {
-            if (heatResistance <= 0)
+            if (heatResistance <= 0 && !isIgnited)
             {
                 burning = true;
+                isIgnited = true;
+                //Needs Cinder color initially to set texture to burning when a particle starts burning
                 GetIgnitedColor();
+                SetElementTexture(graphics);
+            }
+            if (burning)
+            {
                 lifeRemaining -= heatDamage;
+                //Keep cycling Cinder colors
+                GetIgnitedColor();
             }
         }
         //TODO: Maybe check color before setting so that the new color is not the same as the old?

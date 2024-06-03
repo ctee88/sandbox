@@ -32,7 +32,7 @@ namespace sandbox.Components
         //private static Color LAVA_1 = new Color(248, 128, 8); //new Color(248, 136, 8);
 
         //Gases
-        private static Color SMOKE_1 = new Color(86, 89, 88);
+        private static Color SMOKE_1 = new Color(119, 123, 122);//new Color(102, 106, 105);//new Color(86, 89, 88);
 
         public static void InitialiseElementColors()
         {
