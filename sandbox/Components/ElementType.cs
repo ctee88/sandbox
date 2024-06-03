@@ -13,6 +13,7 @@ namespace sandbox.Components
         Water,
         Wood,
         Smoke,
-        Cinder
+        Cinder,
+        Steam
     }
 }

@@ -34,7 +34,7 @@ namespace sandbox.Components
             //properties like corrosionDamage for Acid in the future.
             if (lifeRemaining <= 0)
             {
-                int randomNum = random.Next(0, 10) < 8 ? 1 : 0;
+                int randomNum = random.Next(0, 10) <= 8 ? 1 : 0;
                 if (randomNum == 1)
                 {
                     ElementMatrix.elements[x, y] = Player.CreateElement(typeof(Smoke), graphics);
