@@ -34,6 +34,7 @@ namespace sandbox.Components
         //Gases
         private static Color SMOKE_1 = new Color(119, 123, 122);//new Color(102, 106, 105);//new Color(86, 89, 88);
 
+        private static Color STEAM_1 = new Color(201, 202, 202);
         public static void InitialiseElementColors()
         {
             colorMap.Add("Sand", new List<Color> { SAND_1 , SAND_2, SAND_3 });
@@ -41,7 +42,7 @@ namespace sandbox.Components
             colorMap.Add("Wood", new List<Color> { WOOD_1, WOOD_2, WOOD_3 });
             colorMap.Add("Smoke", new List<Color> { SMOKE_1 });
             colorMap.Add("Cinder", new List<Color> { CINDER_1, CINDER_2, CINDER_3 });
-
+            colorMap.Add("Steam", new List<Color> { STEAM_1 });
         }
 
         //Make another method for single colour elements? Instead of doing this random stuff
