@@ -14,12 +14,12 @@ namespace sandbox.Components
         public static Random random = new Random();
         public Wood(GraphicsDeviceManager graphics) : base(graphics)
         {
-            string elementName = typeof(Wood).Name;
+            elementName = typeof(Wood).Name;
             color = ColorConstants.GetElementColor(elementName);
             SetElementTexture(graphics);
-            lifeRemaining = 400 + (int)(400 * new Random().NextDouble());
+            lifeRemaining = 2000 + (int)(2000 * new Random().NextDouble());
             isFlammable = true;
-            heatResistance = 200;
+            heatResistance = 400;
             heatDamage = 2;
         }
 

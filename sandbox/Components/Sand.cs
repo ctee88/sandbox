@@ -11,7 +11,7 @@ namespace sandbox.Components
     {
         public Sand(GraphicsDeviceManager graphics) : base(graphics)
         {
-            maxVelY = 2;
+            maxVelY = 2f;
             string elementName = typeof(Sand).Name;
             color = ColorConstants.GetElementColor(elementName);
             SetElementTexture(graphics);
