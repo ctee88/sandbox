@@ -40,7 +40,7 @@ namespace sandbox
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            //Potential memory leak issue with how you manage the disposal of ContentManager and Textures
             GuiManager.LoadTextures(Content);
             GuiManager.InitialiseGui();
         }

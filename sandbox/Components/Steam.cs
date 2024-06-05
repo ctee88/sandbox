@@ -15,7 +15,7 @@ namespace sandbox.Components
             lifeSpan = 600 + (int)(600 * new Random().NextDouble());
             lifeRemaining = lifeSpan;
             maxVelY = 0.2f;
-            string elementName = typeof(Steam).Name;
+            elementName = typeof(Steam).Name;
             color = ColorConstants.GetElementColor(elementName);
             SetElementTexture(graphics);
         }

@@ -9,13 +9,13 @@ namespace sandbox.Components
 {
     public class Cinder : MovableSolid
     {
-        private string elementName = typeof(Cinder).Name;
         public Cinder(GraphicsDeviceManager graphics) : base(graphics)
         {
             lifeSpan = 600 + (int)(600 * new Random().NextDouble());
             lifeRemaining = lifeSpan;
             maxVelY = 1f;
             //Set initial color
+            elementName = typeof(Cinder).Name;
             color = ColorConstants.GetElementColor(elementName);
             SetElementTexture(graphics);
             burning = true;

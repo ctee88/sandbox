@@ -11,10 +11,14 @@ namespace sandbox.Components
     {
         public Water(GraphicsDeviceManager graphics) : base(graphics)
         {
-            maxVelY = 2;
-            string elementName = typeof(Water).Name;
+            maxVelY = 2f;
+            elementName = typeof(Water).Name;
             color = ColorConstants.GetElementColor(elementName);
             SetElementTexture(graphics);
+            //lifeRemaining = 1;
+            //isFlammable = true;
+            //heatResistance = 0;
+            //heatDamage = 1;
         }
     }
 }

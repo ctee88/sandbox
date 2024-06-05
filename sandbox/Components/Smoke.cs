@@ -15,7 +15,7 @@ namespace sandbox.Components
             lifeSpan = 400 + (int)(400 * new Random().NextDouble());
             lifeRemaining = lifeSpan;
             maxVelY = 0.2f;
-            string elementName = typeof(Smoke).Name;
+            elementName = typeof(Smoke).Name;
             color = ColorConstants.GetElementColor(elementName);
             SetElementTexture(graphics);
         }
