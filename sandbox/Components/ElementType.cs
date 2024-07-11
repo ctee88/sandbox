@@ -14,6 +14,8 @@ namespace sandbox.Components
         Wood,
         Smoke,
         Cinder,
-        Steam
+        Steam,
+        Acid,
+        FlammableGas
     }
 }

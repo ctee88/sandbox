@@ -48,6 +48,7 @@ namespace sandbox.Components
                     {
                         element.CheckIfFalling();
                         element.UpdateElementLifeRemaining(x, y);
+                        element.ActOnNeighbour(x, y);
 
                         if (!element.isFalling)// && element is MovableSolid) This seems wrong, might get caught out in the future... Wtf do I even need this?
                         {

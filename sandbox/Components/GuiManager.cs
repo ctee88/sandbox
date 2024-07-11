@@ -27,6 +27,8 @@ namespace sandbox.Components
         private static Texture2D _smoke;
         private static Texture2D _cinder;
         private static Texture2D _steam;
+        private static Texture2D _acid;
+        private static Texture2D _flammableGas;
 
         //private static string hoveredElementName;
         //Default selection
@@ -40,6 +42,8 @@ namespace sandbox.Components
             _smoke = content.Load<Texture2D>("smoke");
             _cinder = content.Load<Texture2D>("cinder");
             _steam = content.Load<Texture2D>("steam");
+            _acid = content.Load<Texture2D>("acid");
+            _flammableGas = content.Load<Texture2D>("flammableGas");
         }
 
         public static void InitialiseGui()
@@ -51,6 +55,8 @@ namespace sandbox.Components
             guiElements.Add(new GuiElement(new Rectangle(26, 1, 6, 6), _smoke, ElementType.Smoke));
             guiElements.Add(new GuiElement(new Rectangle(34, 1, 6, 6), _cinder, ElementType.Cinder));
             guiElements.Add(new GuiElement(new Rectangle(42, 1, 6, 6), _steam, ElementType.Steam));
+            guiElements.Add(new GuiElement(new Rectangle(50, 1, 6, 6), _acid, ElementType.Acid));
+            guiElements.Add(new GuiElement(new Rectangle(58, 1, 6, 6), _flammableGas, ElementType.FlammableGas));
         }
 
         public static ElementType GetSelectedElementName()

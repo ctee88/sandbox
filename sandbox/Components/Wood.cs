@@ -21,6 +21,7 @@ namespace sandbox.Components
             isFlammable = true;
             heatResistance = 400;
             heatDamage = 2;
+            corrosionDamage = 10;
         }
 
         public override void UpdateElementLifeRemaining(int x, int y)
