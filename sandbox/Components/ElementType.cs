@@ -16,6 +16,7 @@ namespace sandbox.Components
         Cinder,
         Steam,
         Acid,
-        FlammableGas
+        FlammableGas,
+        Oil
     }
 }

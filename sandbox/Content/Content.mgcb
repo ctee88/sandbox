@@ -25,6 +25,18 @@
 /processorParam:TextureFormat=Color
 /build:../../../../../Desktop/sandbox_textures/flammableGas.png;flammableGas.png
 
+#begin ../../../../../Desktop/sandbox_textures/oil.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../../../../../Desktop/sandbox_textures/oil.png;oil.png
+
 #begin acid.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -55,18 +67,6 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:File.spritefont
-
-#begin gaseousAcid.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:gaseousAcid.png;flammableGas.png
 
 #begin gaseousAcid.png
 /importer:TextureImporter
