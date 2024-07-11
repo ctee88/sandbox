@@ -20,5 +20,10 @@ namespace sandbox.Components
             //heatResistance = 0;
             //heatDamage = 1;
         }
+
+        public override bool Corrode()
+        {
+            return false;
+        }
     }
 }

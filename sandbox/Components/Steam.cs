@@ -32,8 +32,14 @@ namespace sandbox.Components
                 {
                     ElementMatrix.elements[x, y] = Player.CreateElement(typeof(Water), graphics);
                 }
+            } else
+            {
+                lifeRemaining = Math.Abs(lifeRemaining - 1);
             }
-            lifeRemaining = Math.Abs(lifeRemaining - 1);
+        }
+        public override bool Corrode()
+        {
+            return false;
         }
     }
 }

@@ -38,5 +38,9 @@ namespace sandbox.Components
             float percent = (float)lifeRemaining / lifeSpan;
             color = new Color(color.R, color.G, color.B, (byte)(255.0f * percent));
         }
+        public override bool Corrode()
+        {
+            return false;
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace sandbox.Components
 {
 	public abstract class Liquid : Element
 	{
+        //TODO: Liquids need density and must swap positions based on their density
         protected Liquid(GraphicsDeviceManager graphics) : base(graphics) { }
         public override int[] UpdateElementPosition(int x, int y, Element element, bool leftOrRight)
         {

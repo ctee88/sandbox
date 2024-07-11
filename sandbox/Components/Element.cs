@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 
 namespace sandbox.Components
 {
+    //TODO: Clean up Element Child classes - LifeSpan only needed for Smoke or other elements where the colour changes over their lifetimes
     public abstract class Element
     {
         public Color color;
@@ -30,6 +31,7 @@ namespace sandbox.Components
         public bool isFlammable;
         public int heatResistance; //Buffer before an Element starts burning
         public int heatDamage; //Amount of damage an Element takes from heat
+        public int corrosionDamage;
 
         protected Element(GraphicsDeviceManager graphics)
         {
@@ -105,7 +107,9 @@ namespace sandbox.Components
         {
             color = ColorConstants.GetElementColor("Cinder");
         }
-
+        //Rename/redesign to apply all possible effects to neighbours?
+        //Make separate method to get neighbours (as the neighbours needs to be used in multiple methods)
+        // - This method needs to return a list of neighbours
         public void ApplyHeatToNeighbours(int ElementX, int ElementY)
         {
             for (int i = ElementX - 1; i <= ElementX + 1; i++)
@@ -115,23 +119,31 @@ namespace sandbox.Components
                     if (ElementMatrix.IsWithinBounds(i, j) && !ElementMatrix.IsEmptyCell(i, j))
                     {
                         Element neighbour = ElementMatrix.elements[i, j];
-                        if (neighbour.isFlammable)
+                        if (neighbour.isFlammable) 
                         {
                             neighbour.ReceiveHeat();
                         }
 
-                        if (neighbour is Water)
+                        if (neighbour is Water) 
                         {
                             //TODO: - Currently kills burning Element - so deletes burning wood... Need to fix this but not sure how?
                             //      - Cooling functionality isn't that realistic
                             //      - Need to redesign Element, ElementMatrix, Player, Water and Cinder
-                            //          - This controls Water's behaviour when interacting with Cinder, shouldnt this be in the Water class?
+                            //          - This controls Water's behaviour when interacting with Cinder, shouldn't this be in the Water class?
+                            //      - Liquids need to put out fire but the gas which is produced from these interactions will be dependent on the liquid
                             ElementMatrix.Kill(ElementX, ElementY);
                             ElementMatrix.elements[i, j] = Player.CreateElement(typeof(Steam), graphics);
                         }
                     }
                 }
             }
+        }
+        public virtual void ActOnNeighbour(int ElementX, int ElementY) { }
+
+        public virtual bool Corrode()
+        {
+            lifeRemaining -= corrosionDamage;
+            return true;
         }
         //Combine Apply methods into one. Apply the effects based on current element and neighbour?
         //public void ApplyCoolingToNeighbours(int ElementX, int ElementY)
