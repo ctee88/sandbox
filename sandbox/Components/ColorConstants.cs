@@ -28,7 +28,8 @@ namespace sandbox.Components
 
         //Liquids
         private static Color WATER_1 = new Color(28, 86, 234);
-        //private static Color OIL_1 = new Color(55 / 255f, 50 / 255f, 48 / 255f);
+
+        private static Color OIL_1 = new Color(89, 98, 86);
         //private static Color LAVA_1 = new Color(248, 128, 8); //new Color(248, 136, 8);
 
         //Want this green to be almost fluorescent/a bit more vibrant
@@ -50,6 +51,7 @@ namespace sandbox.Components
             colorMap.Add("Steam", new List<Color> { STEAM_1 });
             colorMap.Add("Acid", new List<Color> { ACID_1 });
             colorMap.Add("FlammableGas", new List<Color> { FLAMMABLE_GAS_1 });
+            colorMap.Add("Oil", new List<Color> { OIL_1 });
         }
 
         //Make another method for single colour elements? Instead of doing this random stuff

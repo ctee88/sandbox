@@ -26,6 +26,7 @@ namespace sandbox.Components
             { ElementType.Steam, typeof(Steam) },
             { ElementType.Acid, typeof(Acid) },
             { ElementType.FlammableGas, typeof(FlammableGas) },
+            { ElementType.Oil, typeof(Oil) }
         };
 
         //This method needs a better name?
