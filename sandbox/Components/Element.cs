@@ -32,6 +32,7 @@ namespace sandbox.Components
         public int heatResistance; //Buffer before an Element starts burning
         public int heatDamage; //Amount of damage an Element takes from heat
         public int corrosionDamage;
+        public int density;
 
         protected Element(GraphicsDeviceManager graphics)
         {

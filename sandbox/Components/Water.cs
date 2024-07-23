@@ -15,6 +15,7 @@ namespace sandbox.Components
             elementName = typeof(Water).Name;
             color = ColorConstants.GetElementColor(elementName);
             SetElementTexture(graphics);
+            density = 10;
             //lifeRemaining = 1;
             //isFlammable = true;
             //heatResistance = 0;

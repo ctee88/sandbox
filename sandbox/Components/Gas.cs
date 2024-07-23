@@ -9,6 +9,8 @@ namespace sandbox.Components
 {
     public abstract class Gas : Element
     {
+        //TODO: Gases need density property and must swap positions based on their density
+        public int density;
         protected Gas(GraphicsDeviceManager graphics) : base(graphics) { }
         public override int[] UpdateElementPosition(int x, int y, Element element, bool leftOrRight)
         {
@@ -27,31 +29,31 @@ namespace sandbox.Components
                 return index;
             }
 
-            //Above left
-            else if (ElementMatrix.IsWithinBounds(x - 1, y - 1) && (ElementMatrix.IsEmptyCell(x - 1, y - 1)))
-            {
-                //ElementMatrix.elements[x, y] = null;
-                ElementMatrix.elements[x, y] = ElementMatrix.elements[x - 1, y - 1];
-                ElementMatrix.elements[x - 1, y - 1] = element;
+            ////Above left
+            //else if (ElementMatrix.IsWithinBounds(x - 1, y - 1) && (ElementMatrix.IsEmptyCell(x - 1, y - 1)))
+            //{
+            //    ElementMatrix.elements[x, y] = null;
+            //    ElementMatrix.elements[x, y] = ElementMatrix.elements[x - 1, y - 1];
+            //    ElementMatrix.elements[x - 1, y - 1] = element;
 
-                index[0] = x - 1;
-                index[1] = y - 1;
+            //    index[0] = x - 1;
+            //    index[1] = y - 1;
 
-                return index;
-            }
+            //    return index;
+            //}
 
-            //Above right
-            else if (ElementMatrix.IsWithinBounds(x + 1, y - 1) && (ElementMatrix.IsEmptyCell(x + 1, y - 1)))
-            {
-                //ElementMatrix.elements[x, y] = null;
-                ElementMatrix.elements[x, y] = ElementMatrix.elements[x + 1, y - 1];
-                ElementMatrix.elements[x + 1, y - 1] = element;
+            ////Above right
+            //else if (ElementMatrix.IsWithinBounds(x + 1, y - 1) && (ElementMatrix.IsEmptyCell(x + 1, y - 1)))
+            //{
+            //    ElementMatrix.elements[x, y] = null;
+            //    ElementMatrix.elements[x, y] = ElementMatrix.elements[x + 1, y - 1];
+            //    ElementMatrix.elements[x + 1, y - 1] = element;
 
-                index[0] = x + 1;
-                index[1] = y - 1;
+            //    index[0] = x + 1;
+            //    index[1] = y - 1;
 
-                return index;
-            }
+            //    return index;
+            //}
 
             //Check these after the 3 cells below are occupied
             //There is 100% a way to rewrite these if statements, this method is getting quite ugly 
